@@ -3,11 +3,14 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style>
-      /* Email styles need to be inline */
+     
     </style>
   </head>
 
   <body>
-    <%= yield %>
+    <h1>Recuperação de Senha</h1>
+    <p>Olá <%= @user.Nome %>,</p>
+    <p>Você solicitou a recuperação de senha. Seu código é: <%= @codigo %></p>
+    <p>Se você não solicitou essa recuperação, ignore este e-mail.</p>
   </body>
 </html>
