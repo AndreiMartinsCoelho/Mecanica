@@ -1,4 +1,4 @@
-class useAdmin < ActiveRecord::Migration[7.1]
+class Admin < ActiveRecord::Migration[7.1]
   def change
     create_table :admin do |t|
       t.string :Nome
