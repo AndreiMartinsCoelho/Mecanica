@@ -12,14 +12,14 @@
 
 <div class="info-top"> 
     <%= link_to "Voltar", root_path %>
-    <h3>Peças de qualidade VIP</h3>
+    <h3>Mecânicos de qualidade VIP</h3>
 </div>
-
-<%= render @peca %>
+ 
+<%= render @mecanico %>
 
 <div class="btn-can-put">
-    <%= button_to "Cancelar peça", @peca, method: :delete %>
-    <%= link_to "Atualizar peça", edit_peca_path(@peca) %>
+    <%= button_to "Cancelar mecanico", @mecanico, method: :delete %>
+    <%= link_to "Atualizar mecanico", edit_mecanico_path(@mecanico) %>
 </div>
 
 <% if flash[:notice] %>

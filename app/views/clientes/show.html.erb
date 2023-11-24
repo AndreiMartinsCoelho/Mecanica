@@ -11,15 +11,15 @@
 <body>
 
 <div class="info-top"> 
-    <%= link_to "Voltar", root_path %>
-    <h3>Peças de qualidade VIP</h3>
+    <%= link_to "Voltar", clientes_path %>
+    <h3>Clientes de qualidade VIP</h3>
 </div>
-
-<%= render @peca %>
+ 
+<%= render @cliente %>
 
 <div class="btn-can-put">
-    <%= button_to "Cancelar peça", @peca, method: :delete %>
-    <%= link_to "Atualizar peça", edit_peca_path(@peca) %>
+    <%= button_to "Cancelar cliente", @cliente, method: :delete %>
+    <%= link_to "Atualizar cliente", edit_cliente_path(@cliente) %>
 </div>
 
 <% if flash[:notice] %>

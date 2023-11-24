@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'home/index'
+  get 'home/show'
   get 'mecanicos/index', to: 'mecanicos#index'
   get 'clientes/index'
   get 'pecas/index'
@@ -15,6 +17,9 @@ Rails.application.routes.draw do
   get 'mecanicos/adicionar_mecanico', to: 'mecanicos#adicionar_mecanico'
   post 'mecanicos/adicionar_mecanico', to: 'mecanicos#adicionar_mecanico'
   resources :pecas
+  resources :clientes
+  resources :mecanicos
+  resources :home
   # devise_for :admins
   #get 'boas_vinda/index'
   resources :admins #Cria as rotas para o controller admins GET, POST, PUT, DELETE
@@ -22,5 +27,5 @@ Rails.application.routes.draw do
   get 'login/index'
   post 'login/login'
   get 'login/logout'
-  root 'login#index'
+  root 'home#index'
 end

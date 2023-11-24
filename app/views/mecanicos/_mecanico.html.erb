@@ -10,43 +10,28 @@
     </head>
 <body>
 
-<%= form_tag '/mecanicos/adicionar_mecanico', method: :post do %>
-    <a href="/">Voltar</a>
-    <div>
-        <h1>Mecânicos de qualidade VIP<h1>
+  <div class="Detalhes-peca">
+    <div class="item">
+      <strong class="Label">Nome</strong>
+      <p><%= mecanico.Nome %></p>
     </div>
 
-    <div class="field">
-        <%= label_tag :Nome %><br>
-        <%= text_field_tag :Nome, nil %>
+    <div class="item">
+      <strong class="Label">Email</strong>
+      <p><%= mecanico.Email %></p>
     </div>
 
-    <div class="field">
-        <%= label_tag :Email %><br>
-        <%= text_field_tag :Email, nil %>
+    <div class="item">
+      <strong class="Label">CPF</strong>
+      <p><%= mecanico.CPF %></p>
     </div>
 
-    <div class="field">
-        <%= label_tag :CPF %><br>
-        <%= text_field_tag :CPF, nil %>
+    <div class="item">
+      <strong class="Label">Especialidade</strong>
+      <p><%= mecanico.Especialidade %></p>
     </div>
+  </div>
 
-    <div class="field">
-        <%= label_tag :Especialidade %><br>
-        <%= text_field_tag :Especialidade, nil %>
-    </div>
-
-    <div class="actions">
-        <%= submit_tag 'Adicionar Mecânico+' %>
-    </div>
-
-    <% if flash[:notice] %>
-        <p class="notice"><%= flash[:notice] %></p>
-    <% end %>
-
-    <img src="<%= asset_path('logo.png') %>"/>
-
-<% end %>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
