@@ -46,8 +46,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_19_194008) do
     t.string "Descricao", null: false
     t.string "Especialidade", limit: 200, null: false
     t.integer "Mecanicos_idMecanicos", null: false
-    t.integer "ADMIN_idADMIN", null: false
-    t.index ["ADMIN_idADMIN"], name: "fk_Equipes_ADMIN1_idx"
     t.index ["Mecanicos_idMecanicos"], name: "fk_Equipes_Mecanicos1_idx"
     t.index ["Nome"], name: "Nome_UNIQUE", unique: true
   end
@@ -95,7 +93,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_19_194008) do
     t.index ["Placa"], name: "Placa_UNIQUE", unique: true
   end
 
-  add_foreign_key "equipes", "admin", column: "ADMIN_idADMIN", primary_key: "idADMIN", name: "fk_Equipes_ADMIN1"
   add_foreign_key "equipes", "mecanicos", column: "Mecanicos_idMecanicos", primary_key: "idMecanicos", name: "fk_Equipes_Mecanicos1"
   add_foreign_key "ordens_servico", "clientes", column: "Clientes_idClientes", primary_key: "idClientes", name: "fk_Ordens_Servico_Clientes1"
   add_foreign_key "ordens_servico", "equipes", column: "Equipes_idEquipes", primary_key: "idEquipes", name: "fk_Ordens_Servico_Equipes1"

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'mecanicos/new', to: 'mecanicos#new'
   get 'mecanicos/adicionar_mecanico', to: 'mecanicos#adicionar_mecanico'
   post 'mecanicos/adicionar_mecanico', to: 'mecanicos#adicionar_mecanico'
+  resources :pecas
   # devise_for :admins
   #get 'boas_vinda/index'
   resources :admins #Cria as rotas para o controller admins GET, POST, PUT, DELETE

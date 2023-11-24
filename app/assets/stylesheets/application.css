@@ -21,3 +21,86 @@
     border-radius: 4px;
     color: green;
 }
+
+.info-top{
+    width: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 4%;
+    padding: 10px;
+}
+
+.info-top a{
+    color: black;
+    font-size: 10pt;
+    font-weight: bold;
+    text-decoration: none;
+    padding-bottom: 8px;
+}
+
+.info-top h3{
+    color: #007AFF;
+    font-size: 14pt;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.Detalhes-peca{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item{
+    width: 80%;
+}
+
+.item strong{
+    color: #6F6F6F;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+.item p{
+    color: black;
+    font-size: 12pt;
+    font-weight: 800;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 15px;
+}
+
+.btn-can-put{
+    width: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 4%;
+    padding: 10px;
+
+}
+
+.btn-can-put a{
+    color: white;
+    background-color: #4F9D00;
+    font-size: 12pt;
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.btn-can-put button{
+    border: none;
+    color: white;
+    background-color: #CB0000;
+    font-size: 12pt;
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+}
