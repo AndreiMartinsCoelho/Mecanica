@@ -8,12 +8,11 @@
         <% @pecas.each do |peca| %>
             <div class="list-item">
                 <div class="item2">
-                    <strong>Nome: </strong>
                     <p><%= peca.Tipo_peca %></p>
                 </div>
 
                 <div class="item2">
-                    <strong>Quantidade: </strong>
+                    <strong>Estoque: </strong>
                     <p><%= peca.Quantidade %></p>
                 </div>
 
@@ -32,8 +31,8 @@
     </div>
     <h1 class="Title">Seus mecânicos</h1>
     <div class="list">
-        <div class="list-item">
-            <% @mecanicos.each do |mecanico| %>
+        <% @mecanicos.each do |mecanico| %>
+            <div class="list-item">
                 <div class="item2">
                     <strong>Nome: </strong>
                     <p><%= mecanico.Nome %></p>
@@ -42,7 +41,7 @@
                 <div class="item2">
                     <%= link_to "Saiba mais", mecanico_path(mecanico) %>
                 </div>
-            <% end %>
-        </div>
+            </div>
+        <% end %>
     </div>
-<div>
+</div>
