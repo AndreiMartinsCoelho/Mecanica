@@ -65,5 +65,5 @@ class LoginController < ApplicationController
       redirect_to login_index_path, notice: 'Email ou senha inválidos'
     end
   end
-  
+
 end

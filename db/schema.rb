@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_19_194008) do
+ActiveRecord::Schema[7.1].define(version: 0) do
   create_table "admin", primary_key: "idADMIN", id: :integer, charset: "utf8", collation: "utf8_general_ci", force: :cascade do |t|
     t.string "Nome", null: false
     t.string "Email", null: false
@@ -19,14 +19,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_19_194008) do
     t.string "codigo", limit: 200
     t.index ["CPF"], name: "CPF_UNIQUE", unique: true
     t.index ["Email"], name: "Email_UNIQUE", unique: true
-  end
-
-  create_table "admins", charset: "utf8", collation: "utf8_general_ci", force: :cascade do |t|
-    t.string "Nome"
-    t.string "Email"
-    t.string "Senha"
-    t.float "CPF"
-    t.float "Codigo"
   end
 
   create_table "clientes", primary_key: "idClientes", id: :integer, charset: "utf8", collation: "utf8_general_ci", force: :cascade do |t|
@@ -70,7 +62,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_19_194008) do
     t.integer "Equipes_idEquipes", null: false
     t.integer "Veiculos_idVeiculos", null: false
     t.integer "Clientes_idClientes", null: false
-    t.datetime "Data_prevista", precision: nil, null: false
     t.index ["Clientes_idClientes"], name: "fk_Ordens_Servico_Clientes1_idx"
     t.index ["Equipes_idEquipes"], name: "fk_Ordens_Servico_Equipes1_idx"
     t.index ["Pecas_idPecas"], name: "fk_Ordens_Servico_Pecas1_idx"

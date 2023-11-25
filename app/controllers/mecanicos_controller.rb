@@ -1,5 +1,5 @@
 class MecanicosController < ApplicationController
-  before_action :set_mecanico, only: [:edit, :update, :destroy, :show]
+  before_action :set_mecanico, only: %i[edit update destroy show]
 
   def index
     @mecanico = Mecanico.new
@@ -10,6 +10,9 @@ class MecanicosController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
   end
 
   #ADICIONAR MECANICO
@@ -31,7 +34,7 @@ class MecanicosController < ApplicationController
   def destroy
     @mecanico.destroy!
       respond_to do |format|
-      format.html { redirect_to home_url, notice: "mecanico cancelado com sucesso..." }
+      format.html { redirect_to index, notice: "mecanico cancelado com sucesso..." }
       format.json { head :no_content }
     end
   end
@@ -56,7 +59,7 @@ class MecanicosController < ApplicationController
   end
 
   def set_mecanico
-    @mecanico = Mecanico.find_by(params[:idMecanicos])
+    @mecanico = Mecanico.find(params[:id])
   end
 
   #Parametros para adicionar um mecanico...

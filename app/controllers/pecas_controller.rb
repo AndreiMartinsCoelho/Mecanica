@@ -1,5 +1,5 @@
 class PecasController < ApplicationController
-  before_action :set_peca, only: [:edit, :update, :destroy, :show]
+  before_action :set_peca, only: %i[edit update destroy show]
   def index
     @peca = Peca.new
   end
@@ -30,7 +30,7 @@ class PecasController < ApplicationController
   def destroy
     @peca.destroy!
       respond_to do |format|
-      format.html { redirect_to peca_url, notice: "Peça cancelada com sucesso..." }
+      format.html { redirect_to index, notice: "Peça cancelada com sucesso..." }
       format.json { head :no_content }
     end
   end
@@ -56,7 +56,7 @@ class PecasController < ApplicationController
   end
 
   def set_peca
-    @peca = Peca.find_by(params[:idPecas])
+    @peca = Peca.find(params[:id])
   end
 
   #Parametros para adicionar uma peça nova...
