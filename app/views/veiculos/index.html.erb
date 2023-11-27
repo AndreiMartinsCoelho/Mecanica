@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Adicionar Veiculo</title>
+        <link rel="shortcut icon" href="/images/favicon_32x32.png">
+        <link rel="stylesheet" href="<%= asset_path('application.css') %>"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+<body>
+
+<%= form_tag '/veiculos/adicionar_veiculo', method: :post do %>
+    <a href="/">Voltar</a>
+    <div>
+        <h1>Veiculos de qualidade VIP<h1>
+    </div>
+
+    <div class="field">
+        <%= text_field_tag :Placa, nil, placeholder: "Placa do Veiculo" %>
+    </div>
+
+    <div class="field">
+        <%= date_field_tag :Ano, nil, placeholder: "Ano do Veiculo" %>
+    </div>
+
+    <div class="field">
+        <%= text_field_tag :Modelo, nil, placeholder: "Modelo do Veiculo" %>
+    </div>
+
+    <div class="field-color-cliente">
+        <%= color_field_tag :Cor, nil, placeholder: "Cor do Veiculo" %>
+        <%= select_tag :Clientes_idClientes, options_from_collection_for_select(@clientes, 'idClientes', 'Nome') %>
+        <%= link_to "+", clientes_index_path%>
+    </div>
+
+    <div class="actions">
+        <%= submit_tag 'Adicionar Veiculo+' %>
+    </div>
+
+    <% if flash[:notice] %>
+        <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+
+    <img src="<%= asset_path('logo.png') %>"/>
+
+<% end %>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

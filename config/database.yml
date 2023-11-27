@@ -34,7 +34,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: sample_sqlite3_production
+  database: mecanicaauto
   pool: 5
   username: root
   password:

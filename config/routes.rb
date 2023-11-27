@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'veiculos/index'
+  get 'veiculos/show'
   get 'home/index'
   get 'home/show'
   get 'mecanicos/index', to: 'mecanicos#index'
@@ -16,6 +18,9 @@ Rails.application.routes.draw do
   get 'mecanicos/new', to: 'mecanicos#new'
   get 'mecanicos/adicionar_mecanico', to: 'mecanicos#adicionar_mecanico'
   post 'mecanicos/adicionar_mecanico', to: 'mecanicos#adicionar_mecanico'
+  post 'veiculos/create', to: 'veiculos#create'
+  post 'veiculos/adicionar_veiculo', to: 'veiculos#adicionar_veiculo'
+  resources :veiculos
   resources :pecas
   resources :clientes
   resources :mecanicos

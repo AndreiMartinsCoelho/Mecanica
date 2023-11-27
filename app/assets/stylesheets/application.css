@@ -291,17 +291,20 @@
     border: none;
     padding: 12px;
     margin-top: 40px;
-    transition: 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out,transform 0.3s ease-in-out;
 }
 
 .actions input:hover{
     background: #00428A;
-    transition: 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transform: scale(1.1);
 }
 
 .actions input:active{
     background-color: #00428A;
-    transition: 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transform: matrix3d(1, 0, 0, 0, 0.1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.5);
 }
 
 .field-link{
@@ -323,11 +326,14 @@
     line-height: normal;
     text-decoration-line: underline;
     transition: color 0.3s ease-in-out;
+    transition: font-size 0.3s ease-in-out;
 }
 
 .field-link a:hover{
+    font-size: 1rem;
     color: #007AFF;
     animation: none;
+    transition: color font-size 0.3s ease-in-out;
 }
 
 .div-logo{
@@ -367,4 +373,72 @@
     width: 100%;
     padding: 10px;
     color: red;
+}
+
+.field-color-cliente{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.field-color-cliente input{
+    width: 10.600rem;
+    height: 2.876rem;
+    padding: 12px;
+    border: 2px solid #000000;
+    color: #000000;
+    border-radius: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    font-weight: 600;
+    font-style: normal;
+    line-height: normal;
+    margin-top: 20px;
+    transition: border 0.3s ease-in-out;
+}
+
+.field-b label{
+    color: #000000;
+    font-size: 14pt;
+    font-weight: 700;
+    font-style: normal;
+    line-height: normal;
+    align-items: center;
+    display: flex;
+    text-align: right;
+}
+
+.field-color-cliente input::placeholder{
+    color: #A4A4A4;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    font-weight: 600;
+    font-style: normal;
+    line-height: normal;
+}
+
+.field-color-cliente input:focus{
+    outline: none;
+    border: 2px solid #007AFF;
+    transition: border 0.3s ease-in-out;
+}
+
+.field-color-cliente select{
+    background-color: #FFFFFF;
+    width: 10.600rem;
+    height: 2.876rem;
+    padding: 8px;
+    border: 2px solid #000000;
+    color: #000000;
+    border-radius: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    font-weight: 600;
+    font-style: normal;
+    line-height: normal;
+    margin-top: 20px;
+    transition: border 0.3s ease-in-out;
+    margin-left: 4px;
 }
