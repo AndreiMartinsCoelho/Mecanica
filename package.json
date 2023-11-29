@@ -1,0 +1,11 @@
+{
+  "name": "Mecanica",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/AndreiMartinsCoelho/Mecanica-SimasTurbo.git",
+  "author": "andrei <108534182+AndreiMartinsCoelho@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "sweetalert2": "^11.10.1"
+  }
+}
