@@ -32,8 +32,9 @@
     </div>
 
     <div class="item">
-        <strong class="Label">Cliente</strong>
-        <p><%= veiculo.Clientes_idClientes%></p>
+      <strong class="Label">Cliente</strong>
+      <% cliente = Cliente.find(veiculo.Clientes_idClientes) %>
+      <p><%= cliente.Nome %></p>
     </div>
 
   </div>

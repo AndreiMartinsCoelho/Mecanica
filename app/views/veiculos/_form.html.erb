@@ -28,19 +28,14 @@
     </div>
 
     <div class="field-color-cliente">
-        <%= form.label :Cor %>
         <%= form.color_field :Cor, placeholder: "Cor do Veiculo" %>
-        <% if @clientes.present? %>
-            <div class="field">
-                <%= form.label :Clientes_idClientes, "Cliente" %>
-                <%= form.select :Clientes_idClientes, options_from_collection_for_select(@clientes, 'idClientes', 'Nome'), selected: @veiculo.Clientes_idClientes %>
-            </div>
-        <% else %>
-            <p>Nenhum cliente encontrado.</p>
-        <% end %>
-        <%= link_to "+", clientes_index_path%>
+        <%= form.select :Clientes_idClientes, options_for_select(Cliente.all.map { |cliente| [cliente.Nome, cliente.idClientes] }), { prompt: "Selecione um cliente" }, { class: "form-control" } %>
+        <%= link_to "+", clientes_index_path %>
     </div>
 
+    <div class="field">
+    </div>
+    
     <div class="actions">
         <%= form.submit 'Confirmar' %>
     </div>
