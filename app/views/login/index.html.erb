@@ -17,7 +17,7 @@
   <%= form_tag login_login_path do %>
   <div class="container-login">
     <div class="field">
-      <%= text_field_tag :email, params[:email], required: true, placeholder: "Email" %>
+      <%= email_field_tag :email, params[:email], required: true, placeholder: "Email" %>
     </div>
 
     <div class="field">
