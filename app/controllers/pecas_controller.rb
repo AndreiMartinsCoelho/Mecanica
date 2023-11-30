@@ -30,7 +30,7 @@ class PecasController < ApplicationController
   def destroy
     @peca.destroy!
       respond_to do |format|
-      format.html { redirect_to index, notice: "Peça cancelada com sucesso..." }
+      format.html { redirect_to '/', notice: "Peça cancelada com sucesso..." }
       format.json { head :no_content }
     end
   end

@@ -34,7 +34,7 @@ class MecanicosController < ApplicationController
   def destroy
     @mecanico.destroy!
       respond_to do |format|
-      format.html { redirect_to index, notice: "mecanico cancelado com sucesso..." }
+      format.html { redirect_to '/', notice: "mecanico cancelado com sucesso..." }
       format.json { head :no_content }
     end
   end

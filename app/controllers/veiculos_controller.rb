@@ -32,8 +32,8 @@ class VeiculosController < ApplicationController
     #DELETE VEICULO
     def destroy
       @veiculo.destroy!
-        respond_to do |format|
-        format.html { redirect_to index, notice: "Veiculo cancelado com sucesso..." }
+      respond_to do |format|
+        format.html { redirect_to '/', notice: "Veiculo cancelado com sucesso..." }
         format.json { head :no_content }
       end
     end

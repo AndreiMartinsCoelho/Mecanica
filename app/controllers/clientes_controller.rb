@@ -33,7 +33,7 @@ class ClientesController < ApplicationController
   def destroy
     @cliente.destroy!
       respond_to do |format|
-        format.html { redirect_to home_url, notice: "Cliente cancelado com sucesso..." }
+        format.html { redirect_to '/', notice: "Cliente cancelado com sucesso..." }
         format.json { head :no_content }
     end
   end
