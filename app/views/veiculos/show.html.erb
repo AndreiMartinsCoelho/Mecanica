@@ -18,7 +18,7 @@
 <%= render @veiculo %>
 
 <div class="btn-can-put">
-    <%= button_to "Cancelar Veiculo", @veiculo, method: :delete %>
+    <%= button_to "Cancelar Veiculo", @veiculo, method: :delete, data: { controller: 'sweetalert', action: 'click->sweetalert#showAlert', sweetalert_target: 'sweetalert'} %>
     <%= link_to "Atualizar Veiculo", edit_veiculo_path(@veiculo) %>
 </div>
 

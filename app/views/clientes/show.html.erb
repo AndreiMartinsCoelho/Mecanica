@@ -18,7 +18,7 @@
 <%= render @cliente %>
 
 <div class="btn-can-put">
-    <%= button_to "Cancelar cliente", @cliente, method: :delete %>
+    <%= button_to "Cancelar cliente", @cliente, method: :delete, data: { controller: 'sweetalert', action: 'click->sweetalert#showAlert', sweetalert_target: 'sweetalert'} %>
     <%= link_to "Atualizar cliente", edit_cliente_path(@cliente) %>
 </div>
 
