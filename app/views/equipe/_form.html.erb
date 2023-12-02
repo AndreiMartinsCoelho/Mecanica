@@ -1,0 +1,37 @@
+<%= form_with(model: @equipe, local: true) do |form| %>
+  <% if @equipe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@equipe.errors.count, "error") %> prohibited this equipe from being saved:</h2>
+
+      <ul>
+        <% @equipe.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :Nome %>
+    <%= form.text_field :Nome %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Descricao %>
+    <%= form.text_area :Descricao %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Especialidade %>
+    <%= form.text_field :Especialidade %>
+  </div>
+
+<div class="field">
+    <%= form.label :Mecanicos %>
+    <%= form.collection_select :mecanico_ids, Mecanico.all, :idMecanicos, :Nome, {}, { multiple: true } %>
+</div>
+
+  <div class="actions">
+    <%= form.submit 'Confirmar'%>
+  </div>
+<% end %>

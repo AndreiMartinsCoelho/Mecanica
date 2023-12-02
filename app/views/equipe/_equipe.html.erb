@@ -1,0 +1,11 @@
+
+<h1><%= @equipe.Nome %></h1>
+<p>Especialidade: <%= @equipe.Especialidade %></p>
+<p>Descrição: <%= @equipe.Descricao %></p>
+
+<h2>Mecânicos:</h2>
+<ul>
+  <% @equipe.mecanicos.each do |mecanico| %>
+    <li><%= mecanico.Nome %></li>
+  <% end %>
+</ul>

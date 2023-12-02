@@ -22,11 +22,14 @@ Rails.application.routes.draw do
   post 'mecanicos/adicionar_mecanico', to: 'mecanicos#adicionar_mecanico'
   post 'veiculos/create', to: 'veiculos#create'
   post 'veiculos/adicionar_veiculo', to: 'veiculos#adicionar_veiculo'
+  post 'equipe/create', to: 'equipe#create'
+  post 'equipe/adicionar_equipe', to: 'equipe#adicionar_equipe'
   resources :veiculos
   resources :pecas
   resources :clientes
   resources :mecanicos
   resources :home
+  resources :equipe
   # devise_for :admins
   #get 'boas_vinda/index'
   resources :admins #Cria as rotas para o controller admins GET, POST, PUT, DELETE
