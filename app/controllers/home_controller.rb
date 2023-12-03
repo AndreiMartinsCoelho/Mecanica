@@ -5,6 +5,7 @@ class HomeController < ApplicationController
     @veiculos = Veiculo.all
     @clientes = Cliente.all
     @equipes = Equipe.all
+    @ordens_servico = OrdensServico.all
   end
 
   def show
@@ -13,5 +14,6 @@ class HomeController < ApplicationController
     @veiculo = Veiculo.find(params[:idVeiculos])
     @cliente = Cliente.find(params[:idClientes])
     @equipe = Equipe.find(params[:idEquipes])
+    @ordens_servico = OrdensServico.find(params[:idOrdens_servico])
   end
 end

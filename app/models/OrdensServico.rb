@@ -1,4 +1,4 @@
-class OrdemServico < ApplicationRecord
+class OrdensServico < ApplicationRecord
   has_and_belongs_to_many :pecas, join_table: 'ordens_pecas'
   has_and_belongs_to_many :pecas
   validates :Data_emissao , presence:true

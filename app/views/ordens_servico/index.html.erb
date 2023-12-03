@@ -24,7 +24,7 @@
 
     <div class="field">
         <%= label_tag 'ordens_servico[peca_ids][]', "Peças:" %>
-        <%= select_tag 'ordens_servico[peca_ids][]', options_from_collection_for_select(@pecas, 'idPecas', 'Tipo_peca'), { multiple: true } %>
+        <%= select_tag 'ordens_servico[peca_ids][]', options_from_collection_for_select(@pecas, 'idPecas', ->(peca) { "#{peca.Tipo_peca} - R$ #{peca.Valor_peca}" }), { multiple: true } %>
     </div>
 
     <div class="field">
@@ -43,28 +43,28 @@
     </div>
 
     <div class="field">
-        <%= label_tag 'ordens_servico[Valor]', "Valor:" %>
-        <%= number_field_tag 'ordens_servico[Valor]', nil, placeholder: "Valor" %>
-    </div>
-
-    <div class="field">
         <%= label_tag 'ordens_servico[Data_emissao]', "Data de Emissão:" %>
-        <%= date_field_tag 'ordens_servico[Data_emissao]', nil %>
+        <%= date_field_tag 'ordens_servico[Data_emissao]', Date.today, max: Date.today, min: Date.today %>
     </div>
 
     <div class="field">
         <%= label_tag 'ordens_servico[Data_conclusao]', "Data prevista de conclusão:" %>
-        <%= date_field_tag 'ordens_servico[Data_conclusao]', nil %>
-    </div>
-
-    <div class="field">
-        <%= label_tag 'ordens_servico[Mao_obra]', "Mão de Obra:" %>
-        <%= number_field_tag 'ordens_servico[Mao_obra]', nil %>
+        <%= date_field_tag 'ordens_servico[Data_conclusao]', nil, min: Date.today %>
     </div>
 
     <div class="field">
         <%= label_tag 'ordens_servico[Status]', "Status:" %>
         <%= select_tag 'ordens_servico[Status]', options_for_select([['em andamento', 'em andamento']]) %>
+    </div>
+
+    <div class="field">
+        <%= label_tag 'ordens_servico[Mao_obra]', "Valor da mão de Obra do serviço:" %>
+        <%= number_field_tag 'ordens_servico[Mao_obra]', nil %>
+    </div>
+
+    <div class="field">
+        <%= label_tag 'ordens_servico[Valor]', "Valor total do serviço mais peça:" %>
+        <%= number_field_tag 'ordens_servico[Valor]', nil, placeholder: "Valor" %>
     </div>
 
     <div class="actions">

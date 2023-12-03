@@ -1,0 +1,55 @@
+<%= form_with(model: @ordens_servico, local: true) do |form| %>
+    <div class="field">
+        <%= form.label :Data_emissao %>
+        <%= form.date_field :Data_emissao %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Data_conclusao %>
+        <%= form.date_field :Data_conclusao %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Valor %>
+        <%= form.number_field :Valor %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Mao_obra %>
+        <%= form.number_field :Mao_obra %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Servico_descricao %>
+        <%= form.text_area :Servico_descricao %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Status %>
+        <%= form.select :Status, options_for_select(['Pendente', 'Concluido', 'Em andamento'], @ordens_servico.Status) %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Equipes_idEquipes %>
+        <%= form.collection_select :Equipes_idEquipes, Equipe.all, :idEquipes, :Nome %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Veiculos_idVeiculos %>
+        <%= form.collection_select :Veiculos_idVeiculos, Veiculo.all, :idVeiculos, :Modelo %>
+    </div>
+
+    <div class="field">
+        <%= form.label :Clientes_idClientes %>
+        <%= form.collection_select :Clientes_idClientes, Cliente.all, :idClientes, :Nome %>
+    </div>
+
+    <div class="field">
+        <%= form.label :peca_ids %>
+        <%= form.collection_select :peca_ids, Peca.all, :idPecas, :Tipo_peca, {}, { multiple: true } %>
+    </div>
+
+    <div class="actions">
+        <%= form.submit "Confirmar" %>
+    </div>
+<% end %>

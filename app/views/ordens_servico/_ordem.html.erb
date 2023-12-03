@@ -1,0 +1,18 @@
+<p>Descrição: <%= @ordens_servico.Servico_descricao %></p>
+<p>Valor: <%= @ordens_servico.Valor %></p>
+<p>Mão de Obra: <%= @ordens_servico.Mao_obra %></p>
+<p>Status: <%= @ordens_servico.Status %></p>
+<p>Data de Emissão: <%= @ordens_servico.Data_emissao %></p>
+<p>Data de Conclusão: <%= @ordens_servico.Data_conclusao %></p>
+<% if @ordens_servico.Equipes_idEquipes.present? %>
+    <% equipe = Equipe.find(@ordens_servico.Equipes_idEquipes) %>
+    <p>Nome da Equipe: <%= equipe.Nome %></p>
+<% end %>
+<p>Veículo: <%= Veiculo.find(@ordens_servico.Veiculos_idVeiculos).Modelo %></p>
+<p>Cliente: <%= Cliente.find(@ordens_servico.Clientes_idClientes).Nome %></p>
+<p>Peças:</p>
+<ul>
+    <% @ordens_servico.pecas.each do |pecas| %>
+        <li>Tipo: <%= pecas.Tipo_peca %>, Valor: R$<%= pecas.Valor_peca %></li>
+    <% end %>
+</ul>

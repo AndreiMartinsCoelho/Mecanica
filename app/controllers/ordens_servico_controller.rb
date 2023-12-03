@@ -2,29 +2,32 @@ class OrdensServicoController < ApplicationController
   before_action :set_ordem_servico, only: %i[edit update destroy show]
 
   def index
-    @ordens_servico = OrdemServico.all
+    @ordens_servico = OrdensServico.all
     @veiculos = Veiculo.all
     @clientes = Cliente.all
     @equipes = Equipe.all
     @pecas = Peca.all
+    @mecanicos = Mecanico.all
   end
 
   def show
   end
 
   def new
-    @ordens_servico = OrdemServico.new
+    @ordens_servico = OrdensServico.new
     @veiculos = Veiculo.all
     @clientes = Cliente.all
     @equipes = Equipe.all
     @pecas = Peca.all
+    @mecanicos = Mecanico.all
   end
 
   def edit
   end
 
+  # ADICIONAR EQUIPE
   def create
-    @ordens_servico = OrdemServico.new(ordens_servico_par)
+    @ordens_servico = OrdensServico.new(ordens_servico_par)
 
     if @ordens_servico.save
       flash[:notice] = "Ordem de serviço adicionada com sucesso"
@@ -35,10 +38,26 @@ class OrdensServicoController < ApplicationController
     end
   end
 
+  # UPDATE EQUIPE
   def update
+    respond_to do |format|
+      if @ordens_servico.update(ordens_servico_par)
+        format.html { redirect_to ordens_servico_url(@ordens_servico), notice: "Ordem de serviço editada com sucesso..." }
+        format.json { render :show, status: :ok, location: @ordens_servico }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @ordens_servico.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
+  # CANCELAR ORDEM DE SERVIÇO
   def destroy
+    @ordens_servico.destroy!
+    respond_to do |format|
+      format.html { redirect_to '/', notice: "Ordem de serviço cancelada com sucesso..." }
+      format.json { head :no_content }
+    end
   end
 
   private
@@ -47,7 +66,10 @@ class OrdensServicoController < ApplicationController
   end
 
   def set_ordem_servico
-    @ordens_servico = OrdemServico.find(params[:id])
+    @ordens_servico = OrdensServico.find_by(idOrdens_servicos: params[:id])
+    unless @ordens_servico
+      raise ActiveRecord::RecordNotFound, "Couldn't find OrdensServico with 'idOrdens_servicos'=#{params[:id]}"
+    end
   end
 
 end

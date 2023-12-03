@@ -1,5 +1,142 @@
 <div class="cards">
     <div class="card-info">
+        <h1 class="Title">Faturamento Total</h1>
+        <div class="faturamento-info">
+            <div class="faturamento-item">
+                <h2>Concluídas</h2>
+                <p><%= @ordens_servico.select { |ordem_servico| ordem_servico.Status == "Concluido" }.count %></p>
+            </div>
+            <div class="faturamento-item">
+                <h2>Em andamento</h2>
+                <p><%= @ordens_servico.select { |ordem_servico| ordem_servico.Status == "Em andamento" }.count %></p>
+            </div>
+            <div class="faturamento-item">
+                <h2>Pendentes</h2>
+                <p><%= @ordens_servico.select { |ordem_servico| ordem_servico.Status == "Pendente" }.count %></p>
+            </div>
+            <div class="faturamento-item">
+                <h2>Total de valor</h2>
+                <p><%= @ordens_servico.select { |ordem_servico| ordem_servico.Status == "Concluido" }.sum(&:Valor) %></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-info">
+        <div class="faturamento-info">
+            <div class="faturamento-item">
+                <h2>Equipes</h2>
+                <p><%= Equipe.count %></p>
+            </div>
+            <div class="faturamento-item">
+                <h2>Clientes</h2>
+                <p><%= Cliente.count %></p>
+            </div>
+            <div class="faturamento-item">
+                <h2>Mecânicos</h2>
+                <p><%= Mecanico.count %></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cards">
+    <div class="card-info">
+        <h1>Ordens de Serviço</h1>
+        <a href="/ordens_servico">Adicionar OS+</a>
+    </div>
+    <h1 class="Title">Ordens de serviço em andamento</h1>
+    <div class="list">
+        <% @ordens_servico.each do |ordem_servico| %>
+            <% if ordem_servico.Status == "Em andamento" %>
+                <div class="list-item">
+                    <div class="item2">
+                        <strong>Descrição: </strong>
+                        <p><%= ordem_servico.Servico_descricao %></p>
+                    </div>
+
+                    <div class="item2">
+                        <strong>Data prevista de Conclusão: </strong>
+                        <p><%= ordem_servico.Data_conclusao %></p>
+                    </div>
+
+                    <div class="item2">
+                        <strong>Status: </strong>
+                        <p><%= ordem_servico.Status %></p>
+                    </div>
+
+                    <div class="item2">
+                        <%= link_to "Saiba mais", ordens_servico_path(ordem_servico) %>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+</div>
+
+<div class="cards">
+    <h1 class="Title">Ordens de serviço concluídas</h1>
+    <div class="list">
+        <% @ordens_servico.each do |ordem_servico| %>
+            <% if ordem_servico.Status == "Concluido" %>
+                <div class="list-item">
+                    <div class="item2">
+                        <strong>Descrição: </strong>
+                        <p><%= ordem_servico.Servico_descricao %></p>
+                    </div>
+
+                    <div class="item2">
+                        <strong>Data de Conclusão: </strong>
+                        <p><%= ordem_servico.Data_conclusao %></p>
+                    </div>
+
+                    <div class="item2">
+                        <strong>Status: </strong>
+                        <p><%= ordem_servico.Status %></p>
+                    </div>
+
+                    <div class="item2">
+                        <%= link_to "Saiba mais", ordens_servico_path(ordem_servico) %>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+</div>
+
+<div class="cards">
+    <h1 class="Title">OS Pendentes -</h1>
+    <div class="list">
+        <% @ordens_servico.each do |ordem_servico| %>
+            <% if ordem_servico.Status == "Pendente" %>
+                <div class="list-item">
+                    <div class="item2">
+                        <strong>Descrição: </strong>
+                        <p><%= ordem_servico.Servico_descricao %></p>
+                    </div>
+
+                    <div class="item2">
+                        <strong>Data prevista de Conclusão: </strong>
+                        <p><%= ordem_servico.Data_conclusao %></p>
+                    </div>
+
+                    <div class="item2">
+                        <strong>Status: </strong>
+                        <p><%= ordem_servico.Status %></p>
+                    </div>
+
+                    <div class="item2">
+                        <%= link_to "Saiba mais", ordens_servico_path(ordem_servico) %>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+</div>
+
+
+
+<div class="cards">
+    <div class="card-info">
         <h1>Peças</h1>
         <%= link_to "Adicionar peças+", pecas_path%>
     </div>
