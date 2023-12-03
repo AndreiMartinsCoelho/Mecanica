@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adicionar Ordem</title>
+    <link rel="shortcut icon" href="/images/favicon_32x32.png">
+    <link rel="stylesheet" href="<%= asset_path('application.css') %>"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+<%= form_tag '/ordens_servico/create', method: :post do %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <a href="/">Voltar</a>
+    <div>
+        <h1>Ordens de qualidade VIP</h1>
+    </div>
+
+    <div class="field">
+        <%= label_tag 'ordens_servico[Servico_descricao]', "Descrição da Ordem de Serviço:" %>
+        <%= text_area_tag 'ordens_servico[Servico_descricao]', nil, placeholder: "Descrição da Ordem de Serviço" %>
+    </div>
+
+    <div class="field">
+        <%= label_tag 'ordens_servico[peca_ids][]', "Peças:" %>
+        <%= select_tag 'ordens_servico[peca_ids][]', options_from_collection_for_select(@pecas, 'idPecas', 'Tipo_peca'), { multiple: true } %>
+    </div>
+
+    <div class="field">
+        <%= label_tag 'ordens_servico[Equipes_idEquipes]', "Equipe:" %>
+        <%= select_tag 'ordens_servico[Equipes_idEquipes]', options_from_collection_for_select(@equipes, 'idEquipes', 'Nome') %>
+    </div>
+
+    <div class="field">
+        <%= label_tag 'ordens_servico[Veiculos_idVeiculos]', "Veículo:" %>
+        <%= select_tag 'ordens_servico[Veiculos_idVeiculos]', options_from_collection_for_select(@veiculos, 'idVeiculos', 'Modelo') %>
+    </div>
+
+    <div class="field">
+        <%= label_tag 'ordens_servico[Clientes_idClientes]', "Cliente:" %>
+        <%= select_tag 'ordens_servico[Clientes_idClientes]', options_from_collection_for_select(@clientes, 'idClientes', 'Nome') %>
+    </div>
+
+    <div class="field">
+        <%= label_tag 'ordens_servico[Valor]', "Valor:" %>
+        <%= number_field_tag 'ordens_servico[Valor]', nil, placeholder: "Valor" %>
+    </div>
+
+    <div class="field">
+        <%= label_tag 'ordens_servico[Data_emissao]', "Data de Emissão:" %>
+        <%= date_field_tag 'ordens_servico[Data_emissao]', nil %>
+    </div>
+
+    <div class="field">
+        <%= label_tag 'ordens_servico[Data_conclusao]', "Data prevista de conclusão:" %>
+        <%= date_field_tag 'ordens_servico[Data_conclusao]', nil %>
+    </div>
+
+    <div class="field">
+        <%= label_tag 'ordens_servico[Mao_obra]', "Mão de Obra:" %>
+        <%= number_field_tag 'ordens_servico[Mao_obra]', nil %>
+    </div>
+
+    <div class="field">
+        <%= label_tag 'ordens_servico[Status]', "Status:" %>
+        <%= select_tag 'ordens_servico[Status]', options_for_select([['em andamento', 'em andamento']]) %>
+    </div>
+
+    <div class="actions">
+        <%= submit_tag 'Adicionar Ordem+' %>
+    </div>
+
+    <% if flash[:notice] %>
+        <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+
+    <img src="<%= asset_path('logo.png') %>"/>
+
+<% end %>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

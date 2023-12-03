@@ -1,4 +1,5 @@
 class Peca < ApplicationRecord
+  has_and_belongs_to_many :ordens_servico
   validates :Tipo_peca, presence: true
   validates :Valor_peca, presence: true
   validates :Quantidade, presence: true

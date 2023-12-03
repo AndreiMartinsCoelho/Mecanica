@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'ordem_servico/index'
+  get 'ordem_servico/show'
   get 'equipe/index'
   get 'equipe/show'
   get 'veiculos/index'
@@ -24,12 +26,14 @@ Rails.application.routes.draw do
   post 'veiculos/adicionar_veiculo', to: 'veiculos#adicionar_veiculo'
   post 'equipe/create', to: 'equipe#create'
   post 'equipe/adicionar_equipe', to: 'equipe#adicionar_equipe'
+  post 'ordens_servico/create', to: 'ordens_servico#create'
   resources :veiculos
   resources :pecas
   resources :clientes
   resources :mecanicos
   resources :home
   resources :equipe
+  resources :ordens_servico
   # devise_for :admins
   #get 'boas_vinda/index'
   resources :admins #Cria as rotas para o controller admins GET, POST, PUT, DELETE
