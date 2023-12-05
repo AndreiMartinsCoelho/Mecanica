@@ -1,260 +1,340 @@
-<div class="cards">
-    <div class="card-info">
-        <h1 class="Title">Faturamento Total</h1>
-        <div class="faturamento-info">
-            <div class="faturamento-item">
-                <h2>Concluídas</h2>
-                <p><%= @ordens_servico.select { |ordem_servico| ordem_servico.Status == "Concluido" }.count %></p>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Home</title>
+        <link rel="shortcut icon" href="/images/favicon_32x32.png">
+        <link rel="stylesheet" href="<%= asset_path('application.css') %>"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg nav-dash sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/"><i class="bi bi-gear-wide-connected"></i> Dashboard</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ordens_servico"><i class="bi bi-plus-circle"></i> Adicionar OS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/mecanicos"><i class="bi bi-plus-circle"></i> Adicionar mecânicos</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Mais opções
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/pecas"><i class="bi bi-plus-circle"></i> Adicionar peças</a></li>
+                                <li><a class="dropdown-item" href="/clientes"><i class="bi bi-plus-circle"></i> Adicionar clientes</i></a></li>
+                                <li><a class="dropdown-item" href="/veiculos"><i class="bi bi-plus-circle"></i> Adicionar veiculos</a></li>
+                                <li><a class="dropdown-item" href="/equipe"><i class="bi bi-plus-circle"></i> Adicionar equipes</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="faturamento-item">
-                <h2>Em andamento</h2>
-                <p><%= @ordens_servico.select { |ordem_servico| ordem_servico.Status == "Em andamento" }.count %></p>
+        </nav>
+
+        <header>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="header-info d-flex">
+                            <h1>Dashboard</h1>
+                            <p>Olá, seja bem vindo ao seu dashboard!</p>
+                        </div>
+                        <div>
+                    </div>
+                </div>
             </div>
-            <div class="faturamento-item">
-                <h2>Pendentes</h2>
-                <p><%= @ordens_servico.select { |ordem_servico| ordem_servico.Status == "Pendente" }.count %></p>
-            </div>
-            <div class="faturamento-item">
-                <h2>Total de valor</h2>
-                <p><%= @ordens_servico.select { |ordem_servico| ordem_servico.Status == "Concluido" }.sum(&:Valor) %></p>
+        </header>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-fat">
+                        <div class="card-fat-info d-flex">
+                            <h1 class="Title-fat"><i class="bi bi-graph-up-arrow"></i> Faturamento Total</h1>
+                            <div class="faturamento-info d-flex">
+                                <div class="row">
+                                    <div class="col-md-4 d-flex justify-content-center mb-4">
+                                        <div class="faturamento-item-valor d-flex">
+                                            <p><i class="bi bi-check-circle-fill"></i> Concluídas: <%= @ordens_servico.select { |ordem_servico| ordem_servico.Status == "Concluido" }.count %></p>
+                                            <p>Total <i class="bi bi-currency-dollar"></i>: <%= @ordens_servico.select { |ordem_servico| ordem_servico.Status == "Concluido" }.sum(&:Valor) %></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center mb-4">
+                                        <div class="faturamento-item-pen d-flex">
+                                            <p><i class="bi bi-exclamation-diamond-fill"></i> Pendentes: <%= @ordens_servico.select { |ordem_servico| ordem_servico.Status == "Pendente" }.count %></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center mb-4">
+                                        <div class="faturamento-item d-flex">
+                                            <p><i class="bi bi-people-fill"> </i>Clientes: <%= Cliente.count %></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <%# Select para filtrar as ordens de serviço %>
+                <div class="select-filter">
+                    <label for="status-filter" class="filter-title"><i class="bi bi-filter-square"></i> Filtrar por status:</label>
+                    <select id="status-filter" onchange="filterOrders()" class="form-select">
+                        <option value="all" class="text-primarY">Todas</option>
+                        <option value="concluido" class="text-success">Concluídas</option>
+                        <option value="pendente" class="text-danger">Pendentes</option>
+                    </select>
+                </div>
+
+                <%# Lista de ordens de serviço %>
+                <div class="card-OS">
+                    <div class="list-OS">
+                        <div class="col-md-12">
+                            <div class="card-desc">
+                                <h1 class="Title-OS"><i class="bi bi-gear-wide-connected"></i> Ordens de Serviço</h1>
+                                <a href="/ordens_servico"><i class="bi bi-plus-circle"></i> Adicionar OS</a>
+                            </div>
+                        </div>
+                        <p class="Sub-title-OS">Ordens de serviço</p>
+                        <div class="row card-list-OS d-flex">
+                            <% @ordens_servico.each do |ordem_servico| %>
+                                <% if ordem_servico.Status == "Concluido" || ordem_servico.Status == "Pendente" %>
+                                    <div class="col-md-12 d-flex justify-content-center mb-4">
+                                        <div class="list-item">
+                                            <div class="item2">
+                                                <strong><i class="bi bi-wallet"></i> Descrição: </strong>
+                                                <p><%= ordem_servico.Servico_descricao %></p>
+                                            </div>
+
+                                            <div class="item2">
+                                                <strong><i class="bi bi-calendar2-date"></i> Data de Conclusão: </strong>
+                                                <p><%= ordem_servico.Data_conclusao %></p>
+                                            </div>
+
+                                            <div class="item2">
+                                                <strong><i class="bi bi-clipboard2-pulse"></i> Status: </strong>
+                                                <p class="status-text"><%= ordem_servico.Status %></p>
+                                            </div>
+
+                                            <div class="item2">
+                                                <%= link_to "Saiba mais", ordens_servico_path(ordem_servico) %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function filterOrders() {
+                        var select = document.getElementById("status-filter");
+                        var value = select.value;
+
+                        var items = document.getElementsByClassName("list-item");
+
+                        for (var i = 0; i < items.length; i++) {
+                            var item = items[i];
+                            var status = item.querySelector(".status-text").textContent.trim().toLowerCase();
+
+                            if (value === "all" || status === value) {
+                                item.style.display = "block";
+                            } else {
+                                item.style.display = "none";
+                            }
+                        }
+                    }
+                </script>
+
+                <%# Peças %>
+                <div class="card-OS">
+                    <div class="list-OS">
+                         <div class="col-md-12">
+                            <div class="card-desc">
+                                <h1 class="Title-OS"><i class="bi bi-wrench-adjustable-circle-fill"></i> Peças</h1>
+                                <a href="/pecas"><i class="bi bi-plus-circle"></i> Adicionar peças</a>
+                            </div>
+                        </div>
+                            <p class="Sub-title-OS">Peças cadastradas na oficina</p>
+                            <div class="row card-list-OS d-flex">
+                                <% @pecas.each do |peca| %>
+                                    <div class="col-md-6 d-flex justify-content-center mb-4">
+                                        <div class="list-item">
+                                            <div class="item2">
+                                                <strong><i class="bi bi-wrench"></i> Tipo: </strong>
+                                                <p><%= peca.Tipo_peca %></p>
+                                            </div>
+
+                                            <div class="item2">
+                                                <strong><i class="bi bi-archive"></i> Estoque: </strong>
+                                                <p><%= peca.Quantidade %></p>
+                                            </div>
+
+                                            <div class="item2">
+                                                <%= link_to "Saiba mais", peca_path(peca) %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%# Mecânicos %>
+                    <div class="card-OS">
+                        <div class="list-OS">
+                            <div class="col-md-12">
+                                <div class="card-desc">
+                                    <h1 class="Title-OS"><i class="bi bi-person-gear"></i> Mecânicos</h1>
+                                    <a href="/mecanicos"><i class="bi bi-plus-circle"></i> Adicionar mecânicos</a>
+                                </div>
+                            </div>
+                            <p class="Sub-title-OS">Mecânicos cadastrados na oficina</p>
+                            <div class="row card-list-OS d-flex">
+                                <% @mecanicos.each do |mecanico| %>
+                                    <div class="col-md-6 d-flex justify-content-center mb-4">
+                                        <div class="list-item">
+                                            <div class="item2">
+                                                <strong><i class="bi bi-person-gear"></i> Nome: </strong>
+                                                <p><%= mecanico.Nome %></p>
+                                            </div>
+
+                                            <div class="item2">
+                                                <strong><i class="bi bi-credit-card-fill"></i> CPF: </strong>
+                                                <p><%= mecanico.CPF %></p>
+                                            </div>
+
+                                            <div class="item2">
+                                                <%= link_to "Saiba mais", mecanico_path(mecanico) %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%# Clientes %>
+                    <div class="card-OS">
+                        <div class="list-OS">
+                            <div class="col-md-12">
+                                <div class="card-desc">
+                                    <h1 class="Title-OS"><i class="bi bi-person"></i> Clientes</h1>
+                                    <a href="/clientes"><i class="bi bi-plus-circle"></i> Adicionar clientes</a>
+                                </div>
+                            </div>
+                            <p class="Sub-title-OS">Clientes cadastrados na oficina</p>
+                            <div class="row card-list-OS d-flex">
+                                <% @clientes.each do |cliente| %>
+                                    <div class="col-md-6 d-flex justify-content-center mb-4">
+                                        <div class="list-item">
+                                            <div class="item2">
+                                                <strong><i class="bi bi-person"></i> Nome: </strong>
+                                                <p><%= cliente.Nome %></p>
+                                            </div>
+
+                                            <div class="item2">
+                                                <strong><i class="bi bi-credit-card-fill"></i> CPF: </strong>
+                                                <p><%= cliente.CPF %></p>
+                                            </div>
+
+                                            <div class="item2">
+                                                <%= link_to "Saiba mais", cliente_path(cliente) %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%# Veículos %>
+                    <div class="card-OS">
+                        <div class="list-OS">
+                            <div class="col-md-12">
+                                <div class="card-desc">
+                                    <h1 class="Title-OS"><i class="bi bi-car-front"></i> Veículos</h1>
+                                    <a href="/veiculos"><i class="bi bi-plus-circle"></i> Adicionar veículos</a>
+                                </div>
+                            </div>
+                            <p class="Sub-title-OS">Veículos cadastrados na oficina</p>
+                            <div class="row card-list-OS d-flex">
+                                <% @veiculos.each do |veiculo| %>
+                                    <div class="col-md-6 d-flex justify-content-center mb-4">
+                                        <div class="list-item">
+                                            <div class="item2">
+                                                <strong><i class="bi bi-pip-fill"></i> Placa: </strong>
+                                                <p><%= veiculo.Placa %></p>
+                                            </div>
+
+                                            <div class="item2">
+                                                <strong><i class="bi bi-car-front"></i> Modelo: </strong>
+                                                <p><%= veiculo.Modelo %></p>
+                                            </div>
+
+                                            <div class="item2">
+                                                <%= link_to "Saiba mais", veiculo_path(veiculo) %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%# Equipes %>
+                    <div class="card-OS">
+                        <div class="list-OS">
+                            <div class="col-md-12">
+                                <div class="card-desc">
+                                    <h1 class="Title-OS"><i class="bi bi-people"></i> Equipes</h1>
+                                    <a href="/equipe"><i class="bi bi-plus-circle"></i> Adicionar equipes</a>
+                                </div>
+                            </div>
+                            <p class="Sub-title-OS">Equipes cadastradas na oficina</p>
+                            <div class="row card-list-OS d-flex">
+                                <% @equipes.each do |equipe| %>
+                                    <div class="col-md-6 d-flex justify-content-center mb-4">
+                                        <div class="list-item">
+                                            <div class="item2">
+                                                <strong><i class="bi bi-people"></i> Nome: </strong>
+                                                <p><%= equipe.Nome %></p>
+                                            </div>
+
+                                            <div class="item2">
+                                                <%= link_to "Saiba mais", equipe_path(equipe) %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="card-info">
-        <div class="faturamento-info">
-            <div class="faturamento-item">
-                <h2>Equipes</h2>
-                <p><%= Equipe.count %></p>
-            </div>
-            <div class="faturamento-item">
-                <h2>Clientes</h2>
-                <p><%= Cliente.count %></p>
-            </div>
-            <div class="faturamento-item">
-                <h2>Mecânicos</h2>
-                <p><%= Mecanico.count %></p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="cards">
-    <div class="card-info">
-        <h1>Ordens de Serviço</h1>
-        <a href="/ordens_servico">Adicionar OS+</a>
-    </div>
-    <h1 class="Title">Ordens de serviço em andamento</h1>
-    <div class="list">
-        <% @ordens_servico.each do |ordem_servico| %>
-            <% if ordem_servico.Status == "Em andamento" %>
-                <div class="list-item">
-                    <div class="item2">
-                        <strong>Descrição: </strong>
-                        <p><%= ordem_servico.Servico_descricao %></p>
+        <footer class="footer" style="background-color: #000; color: #FFF">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="footer-info text-center">
+                            <p>Desenvolvido por Andrei</p>
+                            <p>© <%= Time.now.year %> Todos os direitos reservados</p>
+                        </div>
                     </div>
-
-                    <div class="item2">
-                        <strong>Data prevista de Conclusão: </strong>
-                        <p><%= ordem_servico.Data_conclusao %></p>
-                    </div>
-
-                    <div class="item2">
-                        <strong>Status: </strong>
-                        <p><%= ordem_servico.Status %></p>
-                    </div>
-
-                    <div class="item2">
-                        <%= link_to "Saiba mais", ordens_servico_path(ordem_servico) %>
-                    </div>
-                </div>
-            <% end %>
-        <% end %>
-    </div>
-</div>
-
-<div class="cards">
-    <h1 class="Title">Ordens de serviço concluídas</h1>
-    <div class="list">
-        <% @ordens_servico.each do |ordem_servico| %>
-            <% if ordem_servico.Status == "Concluido" %>
-                <div class="list-item">
-                    <div class="item2">
-                        <strong>Descrição: </strong>
-                        <p><%= ordem_servico.Servico_descricao %></p>
-                    </div>
-
-                    <div class="item2">
-                        <strong>Data de Conclusão: </strong>
-                        <p><%= ordem_servico.Data_conclusao %></p>
-                    </div>
-
-                    <div class="item2">
-                        <strong>Status: </strong>
-                        <p><%= ordem_servico.Status %></p>
-                    </div>
-
-                    <div class="item2">
-                        <%= link_to "Saiba mais", ordens_servico_path(ordem_servico) %>
-                    </div>
-                </div>
-            <% end %>
-        <% end %>
-    </div>
-</div>
-
-<div class="cards">
-    <h1 class="Title">OS Pendentes -</h1>
-    <div class="list">
-        <% @ordens_servico.each do |ordem_servico| %>
-            <% if ordem_servico.Status == "Pendente" %>
-                <div class="list-item">
-                    <div class="item2">
-                        <strong>Descrição: </strong>
-                        <p><%= ordem_servico.Servico_descricao %></p>
-                    </div>
-
-                    <div class="item2">
-                        <strong>Data prevista de Conclusão: </strong>
-                        <p><%= ordem_servico.Data_conclusao %></p>
-                    </div>
-
-                    <div class="item2">
-                        <strong>Status: </strong>
-                        <p><%= ordem_servico.Status %></p>
-                    </div>
-
-                    <div class="item2">
-                        <%= link_to "Saiba mais", ordens_servico_path(ordem_servico) %>
-                    </div>
-                </div>
-            <% end %>
-        <% end %>
-    </div>
-</div>
-
-
-
-<div class="cards">
-    <div class="card-info">
-        <h1>Peças</h1>
-        <%= link_to "Adicionar peças+", pecas_path%>
-    </div>
-    <h1 class="Title">Peças na oficina</h1>
-    <div class="list">
-        <% @pecas.each do |peca| %>
-            <div class="list-item">
-                <div class="item2">
-                    <p><%= peca.Tipo_peca %></p>
-                </div>
-
-                <div class="item2">
-                    <strong>Estoque: </strong>
-                    <p><%= peca.Quantidade %></p>
-                </div>
-
-                <div class="item2">
-                    <%= link_to "Saiba mais", peca_path(peca) %>
-                </div>               
-            </div>
-        <% end %>
-    </div>
-</div>
-
-<div class="cards">
-    <div class="card-info">
-        <h1>Mecânicos</h1>
-        <%= link_to "Adicionar mecânicos+", mecanicos_adicionar_mecanico_path%>
-    </div>
-    <h1 class="Title">Mecânicos empregados</h1>
-    <div class="list">
-        <% @mecanicos.each do |mecanico| %>
-            <div class="list-item">
-                <div class="item2">
-                    <strong>Nome: </strong>
-                    <p><%= mecanico.Nome %></p>
-                </div>
-
-                <div class="item2">
-                    <%= link_to "Saiba mais", mecanico_path(mecanico) %>
                 </div>
             </div>
-        <% end %>
-    </div>
-</div>
-
-<div class="cards">
-    <div class="card-info">
-        <h1>Clientes</h1>
-        <%= link_to "Adicionar clientes+", clientes_path%>
-    </div>
-    <h1 class="Title">Clientes cadastrados na oficina</h1>
-    <div class="list">
-        <% @clientes.each do |cliente| %>
-            <div class="list-item">
-                <div class="item2">
-                    <strong>Nome: </strong>
-                    <p><%= cliente.Nome %></p>
-                </div>
-
-                <div class="item2">
-                    <strong>CPF: </strong>
-                    <p><%= cliente.CPF %></p>
-                </div>
-
-                <div class="item2">
-                    <%= link_to "Saiba mais", cliente_path(cliente) %>
-                </div>
-            </div>
-        <% end %>
-    </div>
-</div>
-
-<div class="cards">
-    <div class="card-info">
-        <h1>Veículos</h1>
-        <%= link_to "Adicionar veículos+", veiculos_path%>
-    </div>
-    <h1 class="Title">Veículos registrados na oficina</h1>
-    <div class="list">
-        <% @veiculos.each do |veiculo| %>
-            <div class="list-item">
-                <div class="item2">
-                    <strong>Placa: </strong>
-                    <p><%= veiculo.Placa %></p>
-                </div>
-
-                <div class="item2">
-                    <strong>Modelo: </strong>
-                    <p><%= veiculo.Modelo %></p>
-                </div>
-
-                <div class="item2">
-                    <%= link_to "Saiba mais", veiculo_path(veiculo) %>
-                </div>
-            </div>
-        <% end %>
-    </div>
-</div>
-
-<div class="cards">
-    <div class="card-info">
-        <h1>Equipes</h1>
-        <a href= "/equipe">Adicionar equipes+ </a>
-    </div>
-    <h1 class="Title">Equipes registradas na oficina</h1>
-    <div class="list">
-        <% @equipes.each do |equipe| %>
-            <div class="list-item">
-                <div class="item2">
-                    <strong>Nome: </strong>
-                    <p><%= equipe.Nome %></p>
-                </div>
-
-                <div class="item2">
-                    <%= link_to "Saiba mais", equipe_path(equipe) %>
-                </div>
-            </div>
-        <% end %>
-    </div>
-</div>
+        </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
+</html>
