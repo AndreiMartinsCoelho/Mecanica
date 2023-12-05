@@ -9,38 +9,48 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     </head>
 <body>
+    <div class="container d-flex">
+        <%= form_tag '/login/trocar_senha', class: "container d-flex container-form", method: :put do %>
+            <div class="row">
+                <div class="col-sm-1 d-flex btn-voltar">
+                    <a href="/login/index">Cancelar</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 titulo-reset d-flex mb-5">
+                    <h1>Resetar sua senha<h1>
+                </div>
+            </div>
 
-<% if flash[:notice] %>
-    <p class="notice"><%= flash[:notice] %></p>
-<% end %>
+            <div class="col-sm-12 field-login d-flex">
+                <div class="form-control-sizing-lg mb-4 flex field-login-input">
+                    <%= number_field_tag :Codigo, params[:Codigo], class: "form-control", placeholder: "Codigo" %>
+                </div>
+                <div class="form-control-sizing-lg mb-4 flex field-login-input">
+                    <%= password_field_tag :nova_senha, params[:nova_senha], class: "form-control", placeholder: "Nova senha"%>
+                    <p class=" mt-1">Sua senha deve ter pelo menos 8 caracteres para segurança.</p>
+                </div>
+                <div class="fform-control-sizing-lg mb-4 flex field-login-input mt-3">
+                    <%= password_field_tag :confirma_senha,params[:confirma_senha], class: "form-control", placeholder: "Confirmar senha"%>
+                </div>
 
-<%= form_tag '/login/trocar_senha', method: :put do %>
-    <a href="/login/index">Voltar</a>
-    <div>
-        <h1>Resetar sua senha<h1>
+                 <div class="actions">
+                    <%= submit_tag 'Confirmar' %>
+                </div>
+                <div class="alert-danger mt-2">
+                    <% if flash[:notice] %>
+                    <p class="notice-login"><%= flash[:notice] %></p>
+                        <script>
+                            setTimeout(function() {
+                                document.querySelector('.notice-login').style.display = 'none';
+                            }, 3000);
+                        </script>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
     </div>
-
-    <div class="field">
-        <%= number_field_tag :Codigo, params[:Codigo], placeholder: "Codigo" %>
-    </div>
-
-    <div class="field">
-        <%= password_field_tag :nova_senha, params[:nova_senha], placeholder: "Nova senha"%>
-        <p>Sua senha deve ter pelo menos 8 caracteres para segurança.</p>
-    </div>
-
-    <div class="field">
-        <%= password_field_tag :confirma_senha,params[:confirma_senha], placeholder: "Confirmar senha"%>
-        <p>Sua senha deve ter pelo menos 8 caracteres para segurança.</p>
-    </div>
-
-    <div class="actions">
-        <%= submit_tag 'Trocar senha' %>
-    </div>
-
-    <img src="<%= asset_path('logo.png') %>"/>
-
-<% end %>
+</body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
