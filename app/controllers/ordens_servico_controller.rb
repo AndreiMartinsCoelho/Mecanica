@@ -65,8 +65,15 @@ class OrdensServicoController < ApplicationController
     params.require(:ordens_servico).permit(:Data_emissao, :Data_conclusao, :Valor, :Mao_obra, :Servico_descricao, :Status, :Equipes_idEquipes, :Veiculos_idVeiculos, :Clientes_idClientes, peca_ids: [])
   end
 
+  def add_peca
+    @ordens_servico = OrdensServico.find(params[:id])
+    @peca = Peca.find(params[:peca_id])
+    @ordens_servico.pecas << @peca
+    redirect_to @ordens_servico
+  end
+
   def set_ordem_servico
-    @ordens_servico = OrdensServico.find_by(idOrdens_servicos: params[:id])
+    @ordens_servico = OrdensServico.find(params[:id])
     unless @ordens_servico
       raise ActiveRecord::RecordNotFound, "Couldn't find OrdensServico with 'idOrdens_servicos'=#{params[:id]}"
     end

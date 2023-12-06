@@ -9,45 +9,85 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     </head>
 <body>
-<%= form_tag '/clientes/adicionar_cliente', method: :post do %>
-    <a href="/clientes/index">Voltar</a>
-    <div>
-        <h1>Cliente de qualidade VIP<h1>
+    <nav class="navbar navbar-expand-lg nav-dash sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><i class="bi bi-gear-wide-connected"></i> Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ordens_servico"><i class="bi bi-plus-circle"></i> Adicionar OS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/mecanicos"><i class="bi bi-plus-circle"></i> Adicionar mecânicos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Mais opções
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/pecas"><i class="bi bi-plus-circle"></i> Adicionar peças</a></li>
+                            <li><a class="dropdown-item" href="/clientes"><i class="bi bi-plus-circle"></i> Adicionar clientes</i></a></li>
+                             <li><a class="dropdown-item" href="/veiculos"><i class="bi bi-plus-circle"></i> Adicionar veiculos</a></li>
+                             <li><a class="dropdown-item" href="/equipe"><i class="bi bi-plus-circle"></i> Adicionar equipes</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <%= form_tag '/clientes/adicionar_cliente', class: "container", method: :post do %>
+        <div class="row">
+            <div class="col-sm-12 d-flex card-title mt-4 mb-4">
+                <%= link_to "Voltar", root_path %>
+                <h3><i class="bi bi-person-plus-fill"></i> Adicionando um cliente</h3>
+            </div>
+            <div class="col-sm-12 d-flex field-login mb-5">
+                <div class="form-group form-add">
+                    <%= label_tag :Nome, "Nome", class: "form-label" %>
+                    <%= text_field_tag :Nome, nil, class: "form-control" %>
+                </div>
+
+                <div class="form-group form-add">
+                    <%= label_tag :Email, "Email", class: "form-label" %>
+                    <%= text_field_tag :Email, nil, class: "form-control" %>
+                </div>
+
+                <div class="form-group form-add">
+                    <%= label_tag :CPF, "CPF", class: "form-label" %>
+                    <%= text_field_tag :CPF, nil, class: "form-control" %>
+                </div>
+
+                <div class="form-group form-add">
+                    <%= label_tag :Telefone, "Telefone", class: "form-label" %>
+                    <%= text_field_tag :Telefone, nil, class: "form-control" %>
+                </div>
+
+                <div class="form-group form-add">
+                    <%= label_tag :Endereco, "Endereço", class: "form-label" %>
+                    <%= text_field_tag :Endereco, nil, class: "form-control" %>
+                </div>
+
+                <div class="actions">
+                    <%= submit_tag 'Confirmar', class: 'btn btn-primary' %>
+                </div>
+            </div>
+        </div>
+        <div class="alert-danger mt-2">
+            <% if flash[:notice] %>
+                <p class="notice-login"><%= flash[:notice] %></p>
+                <script>
+                    setTimeout(function() {
+                      document.querySelector('.notice-login').style.display = 'none';
+                    }, 3000);
+                </script>
+            <% end %>
+        </div>
+        <% end %>
     </div>
-
-    <div class="field">
-        <%= label_tag :Nome %><br>
-        <%= text_field_tag :Nome, nil %>
-    </div>
-
-    <div class="field">
-        <%= label_tag :CPF %><br>
-        <%= number_field_tag :CPF, nil %>
-    </div>
-
-    <div class="field">
-        <%= label_tag :Email %><br>
-        <%= email_field_tag :Email, nil %>
-    </div>
-
-    <div class="field">
-        <%= label_tag :Telefone %><br>
-        <%= telephone_field_tag :Telefone, nil %>
-    </div>
-
-    <div class="field">
-        <%= label_tag :Endereco %><br>
-        <%= text_field_tag :Endereco, nil %>
-    </div>
-
-    <div class="actions">
-        <%= submit_tag 'Adicionar Clientes+' %>
-    </div>
-
-    <% if flash[:notice] %>
-        <p class="notice"><%= flash[:notice] %></p>
-    <% end %>
-
-    <img src="<%= asset_path('logo.png') %>"/>
-
-<% end %>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

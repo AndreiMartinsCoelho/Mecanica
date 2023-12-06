@@ -9,50 +9,51 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container-md">
+    <div class="container d-flex">
+        <%= form_with(model: veiculo, class: "container") do |form| %>
         <div class="row">
-            <div class="col">
-                <a href="/">Voltar</a>
-            </div>
+        <div class="col-sm-12 d-flex field-login">
+          <div class="form-group form-add">
+            <%= form.label :Placa,"Placa", class: "form-label" %>
+            <%= form.text_field :Placa, class: "form-control" %>
+          </div>
+
+          <div class="form-group form-add">
+            <%= form.label :Ano,"Ano", class: "form-label" %>
+            <%= form.date_field :Ano, class: "form-control" %>
+          </div>
+
+          <div class="form-group form-add">
+            <%= form.label :Modelo,"Modelo", class: "form-label" %>
+            <%= form.text_field :Modelo, class: "form-control" %>
+          </div>
+
+          <div class="form-group form-add">
+            <%= form.label :Cor,"Cor", class: "form-label" %>
+            <%= form.text_field :Cor, class: "form-control" %>
+          </div>
+
+          <div class="form-group form-add">
+            <%= form.label :Clientes_idClientes,"Cliente", class: "form-label" %>
+            <%= form.select :Clientes_idClientes, options_for_select(Cliente.all.map { |cliente| [cliente.Nome, cliente.idClientes] }), { prompt: "Selecione um cliente" }, { class: "form-control selecionador" } %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit "Confirmar", class: "btn btn-primary" %>
+          </div>
         </div>
-        <div class="row">
-            <div class="col test">
-                <%= form_with(model: veiculo) do |form| %>
-                    <div class="field-c">
-                        <%= form.label :Placa %>
-                        <%= form.text_field :Placa, placeholder: "Placa do Veiculo" %>
-                    </div>
-
-                    <div class="field-c">
-                        <%= form.label :Ano %>
-                        <%= form.date_field :Ano, placeholder: "Ano do Veiculo" %>
-                    </div>
-
-                    <div class="field-c">
-                        <%= form.label :Modelo %>
-                        <%= form.text_field :Modelo, placeholder: "Modelo do Veiculo" %>
-                    </div>
-
-                    <div class="field-color-cliente">
-                        <%= form.color_field :Cor, placeholder: "Cor do Veiculo" %>
-                        <%= form.select :Clientes_idClientes, options_for_select(Cliente.all.map { |cliente| [cliente.Nome, cliente.idClientes] }), { prompt: "Selecione um cliente" }, { class: "form-control" } %>
-                    </div>
-
-                    <div class="field-add-cliente">
-                        <p>Não encontrou o cliente? </p>
-                        <%= link_to "Adicionar Cliente+", clientes_index_path %>
-                    </div>
-
-                    <div class="actions">
-                        <%= form.submit 'Confirmar' %>
-                    </div>
-
-                    <% if flash[:notice] %>
-                        <p class="notice"><%= flash[:notice] %></p>
-                    <% end %>
-                <% end %>
-            </div>
-        </div>
+      </div>
+      <div class="alert-danger mt-2">
+        <% if flash[:notice] %>
+            <p class="notice-login"><%= flash[:notice] %></p>
+            <script>
+                setTimeout(function() {
+                    document.querySelector('.notice-login').style.display = 'none';
+                }, 3000);
+            </script>
+        <% end %>
+       </div>
+       <% end %>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

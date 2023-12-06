@@ -8,44 +8,53 @@
         <link rel="stylesheet" href="<%= asset_path('application.css') %>"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     </head>
-<body>  
-<%= form_with(model: cliente) do |form| %>
-  <div>
-    <%= form.label :Nome, style: "display: block" %>
-    <%= form.text_field :Nome %>
+<body>
+  <div class="container d-flex">
+    <%= form_with(model: cliente, class: "container") do |form| %>
+      <div class="row">
+        <div class="col-sm-12 d-flex field-login">
+          <div class="form-group form-add">
+            <%= form.label :Nome, "Nome", class: "form-label" %>
+            <%= form.text_field :Nome, class: "form-control" %>
+          </div>
+
+          <div class="form-group form-add">
+            <%= form.label :Email, "Email", class: "form-label" %>
+            <%= form.text_field :Email, class: "form-control" %>
+          </div>
+
+          <div class="form-group form-add">
+            <%= form.label :CPF, "CPF", class: "form-label" %>
+            <%= form.text_field :CPF, class: "form-control" %>
+          </div>
+
+          <div class="form-group form-add">
+            <%= form.label :Telefone, "Telefone", class: "form-label" %>
+            <%= form.text_field :Telefone, class: "form-control" %>
+          </div>
+
+          <div class="form-group form-add">
+            <%= form.label :Endereco, "Endereço", class: "form-label" %>
+            <%= form.text_field :Endereco, class: "form-control" %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit "Confirmar", class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :Email, style: "display: block" %>
-    <%= form.text_field :Email %>
+  <div class="alert-danger mt-2">
+    <% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+      <script>
+        setTimeout(function() {
+          document.querySelector('.notice-login').style.display = 'none';
+            }, 3000);
+      </script>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :CPF, style: "display: block" %>
-    <%= form.text_field :CPF %>
-  </div>
-
-  <div>
-    <%= form.label :Telefone, style: "display: block" %>
-    <%= form.text_field :Telefone %>
-  </div>
-
-  <div>
-    <%= form.label :Endereco, style: "display: block" %>
-    <%= form.text_field :Endereco %>
-  </div>
-
-  <div>
-    <%= form.submit "Confirmar", placeholder: "Confirmar" %>
-  </div>
-
-  <% if cliente.errors.any? %>
-    <div style="color: red">
-      <p>Houve algum erro...</p>
-    </div>
-  <% end %>
-
-<% end %>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

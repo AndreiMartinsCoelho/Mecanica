@@ -35,7 +35,6 @@ export default class extends Controller {
     const buttonContainer = document.createElement("div");
     buttonContainer.classList.add("button-container"); //class
     buttonContainer.style.display = "flex";
-    buttonContainer.style.justifyContent = "space-between";
     buttonContainer.style.marginTop = "10px";
 
     const yesButton = document.createElement("button");
