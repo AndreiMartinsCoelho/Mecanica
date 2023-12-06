@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   post 'equipe/create', to: 'equipe#create'
   post 'equipe/adicionar_equipe', to: 'equipe#adicionar_equipe'
   post 'ordens_servico/create', to: 'ordens_servico#create'
+  get 'login/perfil', to: 'login#perfil', as: 'perfil'
+  get 'login/edit_perfil', to: 'login#atualizar_perfil', as: 'edit_perfil'
+  post 'login/logout', to: 'login#logout', as: 'logout'
   resources :veiculos
   resources :pecas
   resources :clientes

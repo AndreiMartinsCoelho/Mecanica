@@ -677,3 +677,117 @@
     box-shadow: 6px 6px 6px #0000001a;
     border: 3px solid black
 }
+
+.perfil-container{
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px!important;
+}
+
+.perfil-title{
+    width: 100%;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.logo-perfil h3{
+    font-size: 30pt;
+    font-weight: 800;
+    color: #007AFF;
+    text-align: center;
+}
+
+.perfil-title a{
+    padding: 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 14pt;
+    font-weight: 800;
+    color: #696969;
+    text-decoration: none;
+}
+
+.logo-perfil{
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.perfil-title a{
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14pt;
+    font-weight: 800;
+    color: #A4A4A4;
+    text-decoration: none;
+}
+
+.perfil-info{
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px!important;
+}
+
+.perfil-info h3{
+    font-size: 24pt;
+    font-weight: 800;
+    color: #00428A;
+}
+
+.perfil-info-content{
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px!important;
+}
+
+.info{
+    width: 50%;
+    border-bottom: 3px solid #454545;
+    margin-top: 10px;
+}
+
+.info p{
+    font-size: 14pt;
+    font-weight: 800;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    color: #00428A;
+}
+
+.info strong{
+    font-size: 14pt;
+    font-weight: 800;
+    color: #454545;
+}
+
+.btn-edit{
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px!important;
+}
+
+.btn-edit a{
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14pt;
+    font-weight: 800;
+    color: #00428A;
+    border: 3px solid #00428A;
+    text-decoration: none;
+}

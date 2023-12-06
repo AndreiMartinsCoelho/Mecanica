@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cliente</title>
+    <title>Adicionar Ordem</title>
     <link rel="shortcut icon" href="/images/favicon_32x32.png">
     <link rel="stylesheet" href="<%= asset_path('application.css') %>"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -27,46 +27,53 @@
                         <a class="nav-link" href="/login/perfil"><i class="bi bi-person-circle"></i> Perfil</a>
                     </li>
                     <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Mais opções
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Mais opções
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/pecas"><i class="bi bi-plus-circle"></i> Adicionar peças</a></li>
                             <li><a class="dropdown-item" href="/clientes"><i class="bi bi-plus-circle"></i> Adicionar clientes</i></a></li>
-                             <li><a class="dropdown-item" href="/veiculos"><i class="bi bi-plus-circle"></i> Adicionar veiculos</a></li>
-                             <li><a class="dropdown-item" href="/equipe"><i class="bi bi-plus-circle"></i> Adicionar equipes</a></li>
+                            <li><a class="dropdown-item" href="/veiculos"><i class="bi bi-plus-circle"></i> Adicionar veiculos</a></li>
+                            <li><a class="dropdown-item" href="/equipe"><i class="bi bi-plus-circle"></i> Adicionar equipes</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
     <div class="container">
         <div class="row">
-            <div class="col-md-12 d-flex card-title mt-4 mb-4">
-                <%= link_to "Voltar", root_path %>
-                <h3><i class="bi bi-people"></i> Clientes de qualidade VIP</h3>
+            <div class="col-md-12 perfil-container d-flex p-0">
+                <div class="d-flex perfil-title">
+                    <a href="/">Voltar</a>
+                </div>
+                <div class="d-flex logo-perfil">
+                    <h3><i class="bi bi-person-circle"></i> Perfil</h3>
+                </div>            
+            </div>
+            <div class="col-md-12 perfil-info d-flex">
+                <div class="d-flex perfil-info-title">
+                    <h3>Informações do usuário</h3>
+                </div>
+                <div class="d-flex perfil-info-content">
+                    <div class="info">
+                        <strong>Nome:</strong>
+                        <p><%= @user.Nome %></p>
+                    </div>
+                    <div class="info">
+                        <strong>Email:</strong>
+                        <p><%= @user.Email %></p>
+                    </div>
+                    <div class="info">
+                        <strong>CPF:</strong>
+                        <p><%= @user.CPF %></p>
+                    </div>
+                    <div class="btn-edit d-flex">
+                        <%= link_to 'Deslogar -', logout_path, method: :post %>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
- 
-    <%= render @cliente %>
-
-    <div class="btn-can-put d-flex justify-center">
-        <%= button_to "Cancelar cliente", @cliente, method: :delete, data: { controller: 'sweetalert', action: 'click->sweetalert#showAlert', sweetalert_target: 'sweetalert'}, class: "btn btn-danger" %>
-        <%= link_to "Atualizar cliente", edit_cliente_path(@cliente), class: "btn btn-success" %>
-    </div>
-
-    <div class="alert-danger mt-2">
-        <% if flash[:notice] %>
-            <p class="notice-login"><%= flash[:notice] %></p>
-            <script>
-                setTimeout(function() {
-                  document.querySelector('.notice-login').style.display = 'none';
-                }, 3000);
-            </script>
-        <% end %>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
