@@ -19,11 +19,14 @@ class PecasController < ApplicationController
     @peca = Peca.new(peca_par)
     if @peca.save
       flash[:notice] = "Peça criada com sucesso"
-      redirect_to action: 'index'
+      redirect_to '/'
     else
       flash[:notice] = "Erro ao criar peça"
-      redirect_to action: 'index'
+      redirect_to '/pecas'
     end
+    rescue StandardError => e
+      flash[:notice] = "Erro ao criar peça"
+      redirect_to '/pecas'
   end
 
   #DELETE

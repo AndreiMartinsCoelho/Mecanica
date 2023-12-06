@@ -22,11 +22,14 @@ class VeiculosController < ApplicationController
     @veiculo = Veiculo.new(veiculo_par)
     if @veiculo.save
       flash[:notice] = "Veiculo adicionado com sucesso"
-      redirect_to action: 'index'
+      redirect_to '/'
     else
       flash[:notice] = "Erro ao adicionar veiculo"
-      redirect_to action: 'new'
+      redirect_to '/veiculos'
     end
+    rescue StandardError => e
+      flash[:notice] = "Erro ao adicionar veiculo"
+      redirect_to '/veiculos'
   end
 
     #DELETE VEICULO

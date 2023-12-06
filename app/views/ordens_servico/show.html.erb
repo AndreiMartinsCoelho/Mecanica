@@ -39,28 +39,32 @@
         </div>
     </nav>
 
-<div class="info-top"> 
-    <%= link_to "Voltar", root_path %>
-    <h3>Equipes de qualidade VIP</h3>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 d-flex card-title mt-4 mb-4">
+                <%= link_to "Voltar", root_path %>
+                <h3><i class="bi bi-gear-wide-connected"></i> OS de qualidade VIP</h3>
+            </div>
+        </div>
+    </div>
 
-<%= render partial: 'ordem', locals: { ordens_servico: @ordens_servico } %>
+    <%= render partial: 'ordem', locals: { ordens_servico: @ordens_servico } %>
 
-<div class="btn-can-put">
-    <%= button_to "Cancelar OS-", @ordens_servico, method: :delete, data: { controller: 'sweetalert', action: 'click->sweetalert#showAlert', sweetalert_target: 'sweetalert'} %>
-    <%= link_to "Atualizar OS", edit_ordens_servico_path(@ordens_servico) %>
-</div>
+    <div class="btn-can-put d-flex justify-center">
+        <%= button_to "Cancelar OS-", @ordens_servico, method: :delete, data: { controller: 'sweetalert', action: 'click->sweetalert#showAlert', sweetalert_target: 'sweetalert'}, class: "btn btn-danger"  %>
+        <%= link_to "Atualizar OS", edit_ordens_servico_path(@ordens_servico), class: "btn btn-success" %>
+    </div>
 
-<% if flash[:notice] %>
-    <p class="notice"><%= flash[:notice] %></p>
-<% end %>
-
-<footer>
-    <p>@2023 AutoMecânica Vip, Inc.</p>
-    <p>Privacidade</p>
-    <p>Termos</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <div class="alert-danger mt-2">
+        <% if flash[:notice] %>
+            <p class="notice-login"><%= flash[:notice] %></p>
+            <script>
+                setTimeout(function() {
+                  document.querySelector('.noticlass: "btn btn-success"ce-login').style.display = 'none';
+                }, 3000);
+            </script>
+        <% end %>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

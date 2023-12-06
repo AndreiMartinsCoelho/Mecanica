@@ -23,11 +23,14 @@ class EquipeController < ApplicationController
 
     if @equipe.save
       flash[:notice] = "Equipe adicionada com sucesso"
-      redirect_to action: 'index'
+      redirect_to '/'
     else
       flash[:notice] = @equipe.errors.full_messages.join(", ")
-      redirect_to action: 'index'
+      redirect_to '/equipe'
     end
+    rescue StandardError => e
+    flash[:notice] = "Erro ao adicionar equipe"
+    redirect_to '/equipe'
   end
 
   # UPDATE EQUIPE

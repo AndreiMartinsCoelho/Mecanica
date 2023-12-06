@@ -1,55 +1,75 @@
-<%= form_with(model: @ordens_servico, local: true) do |form| %>
-    <div class="field">
-        <%= form.label :Data_emissao %>
-        <%= form.date_field :Data_emissao %>
-    </div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Equipe</title>
+    <link rel="shortcut icon" href="/images/favicon_32x32.png">
+    <link rel="stylesheet" href="<%= asset_path('application.css') %>"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container d-flex">
+        <%= form_with(model: @ordens_servico, local: true, class: "container") do |form| %>
+            <div class="row">
+            <div class="col-sm-12 d-flex field-login">
+                <div class="form-group form-add">
+                    <%= form.label :Veiculos_idVeiculos, "Veiculos", class: "form-label" %>
+                    <%= form.collection_select :Veiculos_idVeiculos, Veiculo.all, :idVeiculos, :Placa, {}, { class: "form-control selecionador" } %>
+                </div>
 
-    <div class="field">
-        <%= form.label :Data_conclusao %>
-        <%= form.date_field :Data_conclusao %>
-    </div>
+                <div class="form-group form-add">
+                    <%= form.label :Clientes_idClientes, "Clientes", class: "form-label" %>
+                    <%= form.collection_select :Clientes_idClientes, Cliente.all, :idClientes, :Nome, {}, { class: "form-control selecionador" } %>
+                </div>
 
-    <div class="field">
-        <%= form.label :Valor %>
-        <%= form.number_field :Valor %>
-    </div>
+                <div class="form-group form-add">
+                    <%= form.label :Servico_descricao, class: "form-label" %>
+                    <%= form.text_area :Servico_descricao, class: "form-control" %>
+                </div>
 
-    <div class="field">
-        <%= form.label :Mao_obra %>
-        <%= form.number_field :Mao_obra %>
-    </div>
+                <div class="form-group form-add">
+                    <%= form.label :Data_emissao, class: "form-label" %>
+                    <%= form.date_field :Data_emissao, class: "form-control" %>
+                </div>
 
-    <div class="field">
-        <%= form.label :Servico_descricao %>
-        <%= form.text_area :Servico_descricao %>
-    </div>
+                <div class="form-group form-add">
+                    <%= form.label :Data_conclusao, class: "form-label" %>
+                    <%= form.date_field :Data_conclusao, class: "form-control" %>
+                </div>
 
-    <div class="field">
-        <%= form.label :Status %>
-        <%= form.select :Status, options_for_select(['Pendente', 'Concluido', 'Em andamento'], @ordens_servico.Status) %>
-    </div>
+                <div class="form-group form-add">
+                    <%= form.label :Status, "Status", class: "form-label" %>
+                    <%= form.select :Status, options_for_select(['Pendente', 'Concluido'], @ordens_servico.Status), {}, { class: "form-control selecionador" } %>
+                </div>
 
-    <div class="field">
-        <%= form.label :Equipes_idEquipes %>
-        <%= form.collection_select :Equipes_idEquipes, Equipe.all, :idEquipes, :Nome %>
-    </div>
+                <div class="form-group form-add">
+                    <%= form.label :Valor, class: "form-label" %>
+                    <%= form.number_field :Valor, class: "form-control" %>
+                </div>
 
-    <div class="field">
-        <%= form.label :Veiculos_idVeiculos %>
-        <%= form.collection_select :Veiculos_idVeiculos, Veiculo.all, :idVeiculos, :Modelo %>
-    </div>
+                <div class="form-group form-add">
+                    <%= form.label :Mao_obra, class: "form-label" %>
+                    <%= form.number_field :Mao_obra, class: "form-control" %>
+                </div>
 
-    <div class="field">
-        <%= form.label :Clientes_idClientes %>
-        <%= form.collection_select :Clientes_idClientes, Cliente.all, :idClientes, :Nome %>
-    </div>
+                <div class="form-group form-add">
+                    <%= form.label :Equipes_idEquipes, "Equipes", class: "form-label" %>
+                    <%= form.collection_select :Equipes_idEquipes, Equipe.all, :idEquipes, :Nome, {}, { class: "form-control selecionador" } %>
+                </div>
 
-    <div class="field">
-        <%= form.label :peca_ids %>
-        <%= form.collection_select :peca_ids, Peca.all, :idPecas, :Tipo_peca, {}, { multiple: true } %>
-    </div>
+                <div class="form-group form-add">
+                    <%= form.label :peca_ids, "Peças", class: "form-label" %>
+                    <%= form.collection_select :peca_ids, Peca.all, :idPecas, :Tipo_peca, {}, { multiple: true, class: "form-control selecionador" } %>
+                </div>
 
-    <div class="actions">
-        <%= form.submit "Confirmar" %>
+                <div class="actions">
+                    <%= form.submit "Confirmar", class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+        <% end %>
     </div>
-<% end %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

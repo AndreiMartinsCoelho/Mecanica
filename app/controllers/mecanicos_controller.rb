@@ -20,14 +20,14 @@ class MecanicosController < ApplicationController
     @mecanico = Mecanico.new(mecanico_par)
     if @mecanico.save
       flash[:notice] = "mecanico adicionar com sucesso"
-      redirect_to action: 'index'
+      redirect_to '/'
     else
       flash[:notice] = "Erro ao adicionar mecanico"
-      redirect_to action: 'index'
+      redirect_to '/mecanicos'
     end
     rescue StandardError => e
       flash[:notice] = "Erro ao adicionar mecanico"
-      redirect_to action: 'index'
+      redirect_to '/mecanicos'
   end
 
   #DELETE MECANICO

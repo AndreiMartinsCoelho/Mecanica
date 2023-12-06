@@ -31,11 +31,14 @@ class OrdensServicoController < ApplicationController
 
     if @ordens_servico.save
       flash[:notice] = "Ordem de serviço adicionada com sucesso"
-      redirect_to action: 'index'
+      redirect_to '/'
     else
       flash[:notice] = @ordens_servico.errors.full_messages.join(", ")
-      redirect_to action: 'index'
+      redirect_to '/ordens_servico'
     end
+    rescue StandardError => e
+    flash[:notice] = "Erro ao adicionar ordem de serviço"
+    redirect_to '/ordens_servico'
   end
 
   # UPDATE EQUIPE

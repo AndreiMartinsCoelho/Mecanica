@@ -15,18 +15,16 @@ class ClientesController < ApplicationController
   #ADICIONAR CLIENTE
   def adicionar_cliente
     @cliente = Cliente.new(cliente_par)
-    begin
       if @cliente.save
         flash[:notice] = "Cliente adicionado com sucesso"
-        redirect_to action: 'index'
+        redirect_to '/'
       else
         flash[:notice] = "Erro ao adicionar cliente"
-        redirect_to action: 'index'
+        redirect_to '/clientes/index'
       end
-    rescue StandardError => e
-      flash[:notice] = "Erro ao adicionar cliente"
-      redirect_to action: 'index'
-    end
+      rescue StandardError => e
+        flash[:notice] = "Erro ao adicionar cliente"
+        redirect_to '/clientes/index'
   end
 
   #DELETE CLIENTE

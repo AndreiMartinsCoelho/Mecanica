@@ -1,18 +1,74 @@
-<p>Descrição: <%= @ordens_servico.Servico_descricao %></p>
-<p>Valor: <%= @ordens_servico.Valor %></p>
-<p>Mão de Obra: <%= @ordens_servico.Mao_obra %></p>
-<p>Status: <%= @ordens_servico.Status %></p>
-<p>Data de Emissão: <%= @ordens_servico.Data_emissao %></p>
-<p>Data de Conclusão: <%= @ordens_servico.Data_conclusao %></p>
-<% if @ordens_servico.Equipes_idEquipes.present? %>
-    <% equipe = Equipe.find(@ordens_servico.Equipes_idEquipes) %>
-    <p>Nome da Equipe: <%= equipe.Nome %></p>
-<% end %>
-<p>Veículo: <%= Veiculo.find(@ordens_servico.Veiculos_idVeiculos).Modelo %></p>
-<p>Cliente: <%= Cliente.find(@ordens_servico.Clientes_idClientes).Nome %></p>
-<p>Peças:</p>
-<ul>
-    <% @ordens_servico.pecas.each do |pecas| %>
-        <li>Tipo: <%= pecas.Tipo_peca %>, Valor: R$<%= pecas.Valor_peca %></li>
-    <% end %>
-</ul>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Adicionar Peça</title>
+        <link rel="shortcut icon" href="/images/favicon_32x32.png">
+        <link rel="stylesheet" href="<%= asset_path('application.css') %>"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 d-flex container-info">
+            <div class="Detalhes-cliente d-flex">
+                <div class="item">
+                    <strong class="Label"><i class="bi bi-truck"></i> Placa do Veiculo</strong>
+                    <p><%= Veiculo.find(ordens_servico.Veiculos_idVeiculos).Placa %></p>
+                </div>
+                <div class="item">
+                    <strong class="Label"><i class="bi bi-person"></i> Cliente</strong>
+                    <p><%= Cliente.find(ordens_servico.Clientes_idClientes).Nome %></p>
+                </div>
+                <div class="item">
+                    <strong class="Label"><i class="bi bi-file-text"></i> Descrição</strong>
+                    <p><%= ordens_servico.Servico_descricao %></p>
+                </div>
+                <div class="item">
+                    <strong class="Label"><i class="bi bi-calendar"></i> Data de Emissão</strong>
+                    <p><%= ordens_servico.Data_emissao %></p>
+                </div>
+                <div class="item">
+                    <strong class="Label"><i class="bi bi-calendar-check"></i> Data de Conclusão</strong>
+                    <p><%= ordens_servico.Data_conclusao %></p>
+                </div>
+
+                <div class="item">
+                    <strong class="Label"><i class="bi bi-speedometer"></i> Status</strong>
+                    <p><%= ordens_servico.Status %></p>
+                </div>
+
+                <div class="item">
+                    <strong class="Label"><i class="bi bi-speedometer"></i> Valor Total</strong>
+                    <p><%= ordens_servico.Valor %></p>
+                </div>
+
+                <div class="item">
+                    <strong class="Label"><i class="bi bi-speedometer"></i> Mão de Obra</strong>
+                    <p><%= ordens_servico.Mao_obra %></p>
+                </div>
+
+                <div class="item">
+                    <strong class="Label"><i class="bi bi-speedometer"></i> Equipe Reponsavel</strong>
+                    <% if ordens_servico.Equipes_idEquipes.present? %>
+                    <% equipe = Equipe.find(ordens_servico.Equipes_idEquipes) %>
+                            <p><%= equipe.Nome %></p>
+                    <% end %>
+                </div>
+
+                <div class="item">
+                    <strong class="Label"><i class="bi bi-gear"></i> Peças</strong>
+                    <ul>
+                    <% @ordens_servico.pecas.each do |pecas| %>
+                            <p><%= pecas.Tipo_peca %><p>
+                    <% end %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
