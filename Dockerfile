@@ -6,6 +6,14 @@ FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim AS build_dependencies
 
 WORKDIR /rails
 
+# ...
+
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile --trace
+
+# ...
+
+
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libvips pkg-config default-libmysqlclient-dev
 
@@ -49,5 +57,3 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 CMD ["./bin/rails", "server"]
-
-
