@@ -26,7 +26,11 @@ RUN bundle config --delete without && \
 COPY . .
 
 RUN bundle exec bootsnap precompile --gemfile
-RUN bundle exec rake assets:precompile
+
+# Install dependencies and configure environment before precompiling assets
+RUN apt-get install -y nodejs yarn && \
+    yarn install --check-files && \
+    RAILS_ENV=production bundle exec rake assets:precompile
 
 # Stage 3: Final image
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim AS final
