@@ -28,6 +28,7 @@ COPY . .
 RUN bundle exec bootsnap precompile --gemfile
 
 # Install dependencies and configure environment before precompiling assets
+RUN RAILS_ENV=production bundle install
 RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 # Stage 3: Final image
