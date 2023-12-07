@@ -28,6 +28,8 @@ class OrdensServicoController < ApplicationController
   # ADICIONAR EQUIPE
   def create
     @ordens_servico = OrdensServico.new(ordens_servico_par)
+    @ordens_servico.Veiculos_idVeiculos = params[:Veiculos_idVeiculos]
+    @ordens_servico.Clientes_idClientes = params[:Clientes_idClientes]
 
     if @ordens_servico.save
       flash[:notice] = "Ordem de serviço adicionada com sucesso"
@@ -36,7 +38,7 @@ class OrdensServicoController < ApplicationController
       flash[:notice] = @ordens_servico.errors.full_messages.join(", ")
       redirect_to '/ordens_servico'
     end
-    rescue StandardError => e
+  rescue StandardError => e
     flash[:notice] = "Erro ao adicionar ordem de serviço"
     redirect_to '/ordens_servico'
   end

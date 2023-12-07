@@ -52,12 +52,12 @@
                 <div class="col-sm-12 d-flex field-login mb-5">
                     <div class="form-group form-add">
                         <%= label_tag :Veiculos_idVeiculos, "Veiculos", class: "form-label" %>
-                        <%= select_tag :Veiculos_idVeiculos, options_from_collection_for_select(@veiculos, 'idVeiculos', 'Modelo'), { class: "form-control selecionador" } %>
+                        <%= select_tag :Veiculos_idVeiculos, options_from_collection_for_select(@veiculos, 'idVeiculos', 'Placa'), class: "form-control selecionador" %>
                     </div>
 
                     <div class="form-group form-add">
                         <%= label_tag :Clientes_idClientes, "Clientes", class: "form-label" %>
-                        <%= select_tag :Clientes_idClientes, options_from_collection_for_select(@clientes, 'idClientes', 'Nome'), { class: "form-control selecionador" } %>
+                        <%= select_tag :Clientes_idClientes, options_from_collection_for_select(@clientes, 'idClientes', 'Nome'), class: "form-control selecionador"  %>
                     </div>
 
                     <div class="form-group form-add">
@@ -112,7 +112,7 @@
                 <script>
                     setTimeout(function() {
                         document.querySelector('.notice-login').style.display = 'none';
-                    }, 3000);
+                    },3000000);
                 </script>
             <% end %>
         </div>

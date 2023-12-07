@@ -21,23 +21,6 @@ class LoginController < ApplicationController
     end
   end
 
-  def atualizar_perfil
-    if session[:idAdmin].present?
-      @user = Admin.find_by(idAdmin: session[:idAdmin])
-      if @user
-        if @user.update(user_params)
-          redirect_to perfil_path, notice: 'Perfil atualizado com sucesso!'
-        else
-          render 'perfil'
-        end
-      else
-        redirect_to login_index_path, notice: 'Por favor, faça login para acessar esta página.'
-      end
-    else
-      redirect_to login_index_path, notice: 'Por favor, faça login para acessar esta página.'
-    end
-  end
-
   def esqueceu_senha
     user = Admin.find_by(Email: params[:Email])
     if user
@@ -100,15 +83,13 @@ class LoginController < ApplicationController
   end
 
   private
-  
-  def user_params
-    params.require(:admin).permit(:Nome, :Email, :CPF)
-  end
 
   def require_login
-    unless session[:idAdmin].present?
-      redirect_to login_index_path, notice: 'Por favor, faça login para acessar esta página.'
-    end
+    # Implement your logic here
+  end
+
+  def user_params
+    params.require(:admin).permit(:Nome, :Email, :CPF)
   end
 
 end

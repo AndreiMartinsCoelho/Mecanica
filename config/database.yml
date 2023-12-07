@@ -7,14 +7,17 @@
 #
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
+
 development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: mecanicaauto
+  database: <%= ENV['DATABASE_NAME'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
   pool: 5
-  username: root
-  password: 1234
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -24,18 +27,22 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: mecanicaauto
+  database: <%= ENV['DATABASE_NAME'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
   pool: 5
-  username: root
-  password: 1234
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   socket: /tmp/mysql.sock
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: mecanicaauto
+  database: <%= ENV['DATABASE_NAME'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
   pool: 5
-  username: root
-  password: 1234
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   socket: /tmp/mysql.sock
