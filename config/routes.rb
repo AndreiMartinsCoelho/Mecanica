@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'render/index'
-  root 'render#index'
   get 'ordem_servico/index'
   get 'ordem_servico/show'
   get 'equipe/index'
