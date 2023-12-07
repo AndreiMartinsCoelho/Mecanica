@@ -29,7 +29,7 @@ RUN bundle exec bootsnap precompile --gemfile
 
 # Install dependencies and configure environment before precompiling assets
 RUN apt-get install -y nodejs yarn && \
-    yarn install --check-files && \
+    yarn install && \
     RAILS_ENV=production bundle exec rake assets:precompile
 
 # Stage 3: Final image
