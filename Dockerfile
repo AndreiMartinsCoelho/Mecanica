@@ -38,6 +38,8 @@ RUN chmod +x bin/* && \
     sed -i "s/\r$//g" bin/* && \
     sed -i 's/ruby\.exe$/ruby/' bin/*
 
+# Precompiling assets for production
+RUN ./bin/rails assets:precompile --trace
 # Final stage for app image
 FROM base
 
