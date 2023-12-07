@@ -11,11 +11,8 @@ COPY ./bin ./bin
 
 # Install dependencies
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libvips pkg-config default-libmysqlclient-dev curl && \
-    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get install -y nodejs && \
-    npm install -g yarn && \
-    apt-get clean
+    apt-get upgrade -y && \
+    apt-get install --no-install-recommends -y build-essential git libvips pkg-config default-libmysqlclient-dev
 
 # Stage 2: Build and precompile assets
 FROM build_dependencies AS builder
@@ -29,6 +26,9 @@ RUN bundle config --delete without && \
 COPY . .
 
 RUN bundle exec bootsnap precompile --gemfile
+
+# Install dependencies and configure environment before precompiling assets
+RUN RAILS_ENV=production bundle exec rake assets:precompile
 
 # Stage 3: Final image
 FROM ruby:$RUBY_VERSION-slim AS final
@@ -56,4 +56,5 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 CMD ["./bin/rails", "server"]
+
 
