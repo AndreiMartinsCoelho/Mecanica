@@ -11,7 +11,8 @@ WORKDIR /rails
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_WITHOUT="development" \
+    SECRET_KEY_BASE_DUMMY=1
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
@@ -37,6 +38,9 @@ RUN chmod +x bin/* && \
     sed -i "s/\r$//g" bin/* && \
     sed -i 's/ruby\.exe$/ruby/' bin/*
 
+# Precompiling assets for production
+RUN ./bin/rails assets:precompile
+
 # Final stage for app image
 FROM base
 
@@ -54,8 +58,8 @@ RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
 USER rails:rails
 
-# Entrypoint prepares the database and precompiles assets.
-ENTRYPOINT ["/rails/bin/docker-entrypoint", "SECRET_KEY_BASE_DUMMY=1", "./bin/rails", "assets:precompile"]
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
