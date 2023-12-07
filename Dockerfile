@@ -17,9 +17,12 @@ ENV RAILS_ENV="production" \
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
-# Install packages needed to build gems
+# Install packages needed to build gems and assets
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libvips pkg-config default-libmysqlclient-dev
+    apt-get install --no-install-recommends -y build-essential git libvips pkg-config default-libmysqlclient-dev curl && \
+    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install -g yarn
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -40,6 +43,7 @@ RUN chmod +x bin/* && \
 
 # Precompiling assets for production
 RUN ./bin/rails assets:precompile --trace
+
 # Final stage for app image
 FROM base
 
@@ -58,7 +62,7 @@ RUN useradd rails --create-home --shell /bin/bash && \
 USER rails:rails
 
 # Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+ENTRYPOINT ["/rails/bin/docker-entry"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
