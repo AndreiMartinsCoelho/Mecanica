@@ -81,16 +81,6 @@
                     </div>
 
                     <div class="form-group form-add">
-                        <%= label_tag 'ordens_servico[Valor]', "Valor total do serviço mais peça:" %>
-                        <%= number_field_tag 'ordens_servico[Valor]', nil, placeholder: "Valor", class: "form-control" %>
-                    </div>
-
-                    <div class="form-group form-add">
-                        <%= label_tag 'ordens_servico[Mao_obra]', "Valor da mão de Obra do serviço:" %>
-                        <%= number_field_tag 'ordens_servico[Mao_obra]', nil, class: "form-control" %>
-                    </div>
-
-                    <div class="form-group form-add">
                         <%= label_tag 'ordens_servico[Equipes_idEquipes]', "Equipes", class: "form-label" %>
                         <%= select_tag 'ordens_servico[Equipes_idEquipes]', options_from_collection_for_select(@equipes, 'idEquipes', 'Nome'), { class: "form-control selecionador" } %>
                     </div>
@@ -100,6 +90,44 @@
                         <%= select_tag 'ordens_servico[peca_ids][]', options_from_collection_for_select(@pecas, 'idPecas', ->(peca) { "#{peca.Tipo_peca} - R$ #{peca.Valor_peca}" }), { multiple: true, class: "form-control selecionador" } %>
                     </div>
 
+                    <div class="form-group form-add">
+                        <%= label_tag 'ordens_servico[Mao_obra]', "Valor da mão de Obra do serviço:" %>
+                        <%= number_field_tag 'ordens_servico[Mao_obra]', nil, class: "form-control", id: "mao_obra" %>
+                    </div>
+
+                    <div class="form-group form-add">
+                        <%= label_tag 'ordens_servico[Valor]', "Valor total do serviço mais peça:" %>
+                        <%= number_field_tag 'ordens_servico[Valor]', nil, placeholder: "Valor", class: "form-control", id: "valor_total", readonly: true %>
+                    </div>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            const maoObraInput = document.getElementById("mao_obra");
+                            const valorTotalInput = document.getElementById("valor_total");
+                            const pecasSelects = document.querySelectorAll("select[name='ordens_servico[peca_ids][]']");
+
+                            if (!maoObraInput || !valorTotalInput || !pecasSelects) {
+                                return;
+                            }
+
+                            maoObraInput.addEventListener("input", updateValorTotal);
+                            pecasSelects.forEach(select => select.addEventListener("change", updateValorTotal));
+
+                            function updateValorTotal() {
+                                const maoObra = parseFloat(maoObraInput.value);
+                                const valorPeca = Array.from(document.querySelectorAll("select[name='ordens_servico[peca_ids][]'] option:checked")).reduce((sum, option) => {
+                                    const valorPecaParts = option.textContent.split(' - R$ ');
+                                    const valorPeca = valorPecaParts.length > 1 ? parseFloat(valorPecaParts[1]) : 0;
+                                    return sum + (isNaN(valorPeca) ? 0 : valorPeca);
+                                }, 0);
+                                const valorTotal = maoObra + valorPeca;
+
+                                valorTotalInput.value = isNaN(valorTotal) ? "" : valorTotal.toFixed(2);
+                            }
+
+                            updateValorTotal();
+                        });
+                    </script>
                     <div class="actions">
                         <%= submit_tag 'Confirmar', class: 'btn btn-primary' %>
                     </div>

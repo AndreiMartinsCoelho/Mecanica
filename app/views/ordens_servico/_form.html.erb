@@ -44,24 +44,47 @@
                 </div>
 
                 <div class="form-group form-add">
-                    <%= form.label :Valor, class: "form-label" %>
-                    <%= form.number_field :Valor, class: "form-control" %>
-                </div>
-
-                <div class="form-group form-add">
-                    <%= form.label :Mao_obra, class: "form-label" %>
-                    <%= form.number_field :Mao_obra, class: "form-control" %>
-                </div>
-
-                <div class="form-group form-add">
                     <%= form.label :Equipes_idEquipes, "Equipes", class: "form-label" %>
                     <%= form.collection_select :Equipes_idEquipes, Equipe.all, :idEquipes, :Nome, {}, { class: "form-control selecionador" } %>
                 </div>
 
                 <div class="form-group form-add">
                     <%= form.label :peca_ids, "Peças", class: "form-label" %>
-                    <%= form.collection_select :peca_ids, Peca.all, :idPecas, :Tipo_peca, {}, { multiple: true, class: "form-control selecionador" } %>
+                    <%= form.collection_select :peca_ids, Peca.all, :idPecas, ->(peca) { "#{peca.Tipo_peca} - R$ #{peca.Valor_peca}" }, { include_blank: false }, { multiple: true, class: "form-control selecionador", id: "peca_ids" } %>
                 </div>
+
+                <div class="form-group form-add">
+                    <%= form.label :Mao_obra, "Valor da mão de Obra do serviço:", class: "form-label" %>
+                    <%= form.number_field :Mao_obra, class: "form-control", id: "mao_obra" %>
+                </div>
+
+                <div class="form-group form-add">
+                    <%= form.label :Valor, "Valor total do serviço mais peça:", class: "form-label" %>
+                    <%= form.number_field :Valor, class: "form-control", id: "valor_total" %>
+                </div>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const maoObraInput = document.getElementById("mao_obra");
+                        const valorTotalInput = document.getElementById("valor_total");
+                        const pecasSelect = document.getElementById("peca_ids");
+
+                        maoObraInput.addEventListener("input", updateValorTotal);
+                        pecasSelect.addEventListener("change", updateValorTotal);
+
+                        function updateValorTotal() {
+                            const maoObra = parseFloat(maoObraInput.value);
+                            const valorPeca = Array.from(pecasSelect.selectedOptions).reduce((sum, option) => {
+                                const valorPeca = parseFloat(option.textContent.split(' - R$ ')[1]);
+                                return sum + (isNaN(valorPeca) ? 0 : valorPeca);
+                            }, 0);
+                            const valorTotal = maoObra + valorPeca;
+
+                            valorTotalInput.value = isNaN(valorTotal) ? "" : valorTotal.toFixed(2);
+                        }
+                    });
+                </script>
+
 
                 <div class="actions">
                     <%= form.submit "Confirmar", class: "btn btn-primary" %>
